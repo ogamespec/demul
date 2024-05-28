@@ -148,7 +148,7 @@ bool IsOpened() {
 	return(lpDI != NULL);
 }
 
-__inline bool padReadDevice() {
+bool padReadDevice() {
 	u32 i;
 	HRESULT hr;
 
@@ -194,7 +194,7 @@ __inline bool padReadDevice() {
             OutputDebugString(buf);*/
 
 
-__inline bool CheckKeyPressed(u32 key) {
+bool CheckKeyPressed(u32 key) {
 	u8 joyIdx;
 
 	if (key == 0)
@@ -227,7 +227,7 @@ __inline bool CheckKeyPressed(u32 key) {
 	return false;
 }
 
-__inline u8 CheckKeyAxis(u32 key) {
+u8 CheckKeyAxis(u32 key) {
 	u8 joyIdx;
 
 	if (key == 0)

@@ -37,7 +37,7 @@ u32 mainBufferPosition = -1;
 volatile HANDLE soundThreadHandle = NULL;
 HANDLE soundEvents[EVENTS_COUNT];
 
-INLINE static bool CHECK_ERROR(HRESULT result, char *message) {
+static bool CHECK_ERROR(HRESULT result, char *message) {
 	static char errorString[300];
 	if (result != S_OK) {
 		sprintf(errorString, "Error! (HRESULT = %d) %s\n", result, message);

@@ -34,7 +34,7 @@ typedef struct {
 
 GDR_TOC GD_TOC;
 
-s32 INLINE msf_to_lba(u8 m, u8 s, u8 f) {
+s32 msf_to_lba(u8 m, u8 s, u8 f) {
 	u32 lsn;
 	lsn = f;
 	lsn += (s - 2) * 75;
@@ -42,7 +42,7 @@ s32 INLINE msf_to_lba(u8 m, u8 s, u8 f) {
 	return lsn;
 }
 
-void INLINE lba_to_msf(s32 lba, u8* m, u8* s, u8* f) {
+void lba_to_msf(s32 lba, u8* m, u8* s, u8* f) {
 	lba += 150;
 	*m = lba / (60 * 75);
 	*s = (lba / 75) % 60;

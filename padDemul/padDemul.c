@@ -15,7 +15,7 @@
 
 #include <windows.h>
 #include "device.h"
-#include "config.h"
+#include "padConfig.h"
 #include "plugins.h"
 
 DEmulInfo* padDemulInfo;
@@ -26,7 +26,7 @@ int padOpen(DEmulInfo *demulInfo) {
 		padCloseDevice();
 		return 0;
 	}
-	if (!LoadConfig(true)) {
+	if (!padLoadConfig(true)) {
 		padCloseDevice();
 		return 0;
 	}
@@ -47,13 +47,13 @@ void padConfigure() {
 			padCloseDevice();
 			return;
 		}
-		if (!LoadConfig(false)) {
+		if (!padLoadConfig(false)) {
 			padCloseDevice();
 			return;
 		}
 	}
 
-	SetConfig();
+	padSetConfig();
 
 	if (!wasOpened)
 		padCloseDevice();

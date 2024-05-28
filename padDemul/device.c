@@ -18,7 +18,7 @@
 #include <windows.h>
 #include <dinput.h>
 #include "device.h"
-#include "config.h"
+#include "padConfig.h"
 #include "plugins.h"
 
 #define KEYDOWN(key) (keys[key] & 0x80)
@@ -280,32 +280,32 @@ void GetControllerDevice(CONTROLLER *controller, u32 port) {
 #define CHECK_KEY(key, mask) \
 	if (CheckKeyPressed(key)) controller->joyButtons &= ~mask; else
 
-	CHECK_KEY(cfg.joy[port].UP, CONT_DPAD_UP);
-	CHECK_KEY(cfg.joy[port].DOWN, CONT_DPAD_DOWN);
-	CHECK_KEY(cfg.joy[port].LEFT, CONT_DPAD_LEFT);
-	CHECK_KEY(cfg.joy[port].RIGHT, CONT_DPAD_RIGHT);
-	CHECK_KEY(cfg.joy[port].A, CONT_A);
-	CHECK_KEY(cfg.joy[port].B, CONT_B);
-	CHECK_KEY(cfg.joy[port].C, CONT_C);
-	CHECK_KEY(cfg.joy[port].D, CONT_D);
-	CHECK_KEY(cfg.joy[port].X, CONT_X);
-	CHECK_KEY(cfg.joy[port].Y, CONT_Y);
-	CHECK_KEY(cfg.joy[port].Z, CONT_Z);
-	CHECK_KEY(cfg.joy[port].START, CONT_START);
+	CHECK_KEY(padcfg.joy[port].UP, CONT_DPAD_UP);
+	CHECK_KEY(padcfg.joy[port].DOWN, CONT_DPAD_DOWN);
+	CHECK_KEY(padcfg.joy[port].LEFT, CONT_DPAD_LEFT);
+	CHECK_KEY(padcfg.joy[port].RIGHT, CONT_DPAD_RIGHT);
+	CHECK_KEY(padcfg.joy[port].A, CONT_A);
+	CHECK_KEY(padcfg.joy[port].B, CONT_B);
+	CHECK_KEY(padcfg.joy[port].C, CONT_C);
+	CHECK_KEY(padcfg.joy[port].D, CONT_D);
+	CHECK_KEY(padcfg.joy[port].X, CONT_X);
+	CHECK_KEY(padcfg.joy[port].Y, CONT_Y);
+	CHECK_KEY(padcfg.joy[port].Z, CONT_Z);
+	CHECK_KEY(padcfg.joy[port].START, CONT_START);
 
 #define CHECK_AXIS(key, name) \
 	{ u8 v = CheckKeyAxis(key); if (v > 0) controller->name = v << 1; else controller->name = 0; }
 
-	CHECK_AXIS(cfg.joy[port].LTRIG, leftTrig);
-	CHECK_AXIS(cfg.joy[port].RTRIG, rightTrig);
+	CHECK_AXIS(padcfg.joy[port].LTRIG, leftTrig);
+	CHECK_AXIS(padcfg.joy[port].RTRIG, rightTrig);
 
 #define CHECK_AXIS2(key1, key2, name) \
 	{ u8 v = CheckKeyAxis(key1); if (v > 0) controller->name = 127 - v; else { v = CheckKeyAxis(key2);  if (v > 0) controller->name = 128 + v; else controller->name = 128; } }
 
-	CHECK_AXIS2(cfg.joy[port].STICK1LEFT, cfg.joy[port].STICK1RIGHT, stick1X);
-	CHECK_AXIS2(cfg.joy[port].STICK1UP, cfg.joy[port].STICK1DOWN, stick1Y);
-	CHECK_AXIS2(cfg.joy[port].STICK2LEFT, cfg.joy[port].STICK2RIGHT, stick2X);
-	CHECK_AXIS2(cfg.joy[port].STICK2UP, cfg.joy[port].STICK2DOWN, stick2Y);
+	CHECK_AXIS2(padcfg.joy[port].STICK1LEFT, padcfg.joy[port].STICK1RIGHT, stick1X);
+	CHECK_AXIS2(padcfg.joy[port].STICK1UP, padcfg.joy[port].STICK1DOWN, stick1Y);
+	CHECK_AXIS2(padcfg.joy[port].STICK2LEFT, padcfg.joy[port].STICK2RIGHT, stick2X);
+	CHECK_AXIS2(padcfg.joy[port].STICK2UP, padcfg.joy[port].STICK2DOWN, stick2Y);
 
 /*	if (port == 0)
     {

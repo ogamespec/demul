@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\padDemul\Config.c" />
+    <ClCompile Include="..\padDemul\padConfig.c" />
     <ClCompile Include="..\padDemul\device.c" />
     <ClCompile Include="..\padDemul\padDemul.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\padDemul\Config.h" />
+    <ClInclude Include="..\padDemul\padConfig.h" />
     <ClInclude Include="..\padDemul\device.h" />
     <ClInclude Include="..\padDemul\resource.h" />
   </ItemGroup>

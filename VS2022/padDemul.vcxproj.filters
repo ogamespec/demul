@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\padDemul\Config.c">
+    <ClCompile Include="..\padDemul\padConfig.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\padDemul\device.c">
@@ -26,7 +26,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\padDemul\Config.h">
+    <ClInclude Include="..\padDemul\padConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\padDemul\device.h">

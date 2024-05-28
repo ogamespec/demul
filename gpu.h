@@ -18,7 +18,7 @@
 
 #include "types.h"
 
-void FASTCALL gpuIrq(u32 code);
-void FASTCALL hblank();
+void gpuIrq(u32 code);
+void hblank();
 
 #endif

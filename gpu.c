@@ -18,11 +18,11 @@
 #include "asic.h"
 #include "plugins.h"
 
-void FASTCALL gpuIrq(u32 code) {
+void gpuIrq(u32 code) {
 	hwInt(code);
 }
 
-void FASTCALL hblank() {
+void hblank() {
 	u32 count = ASIC32(0x810c) & 0x3ff;
 
 	ASIC32(0x810c) &= ~0x2000;

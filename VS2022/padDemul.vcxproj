@@ -26,10 +26,6 @@
   <ItemGroup>
     <ClInclude Include="..\padDemul\padConfig.h" />
     <ClInclude Include="..\padDemul\device.h" />
-    <ClInclude Include="..\padDemul\resource.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\padDemul\padDemul.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

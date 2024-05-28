@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <dinput.h>
-#include "resource.h"
+#include "win32/resource.h"
 #include "plugins.h"
 #include "padConfig.h"
 #include "device.h"
@@ -703,7 +703,7 @@ bool padSetConfig() {
 	key = NULL;
 
 	tunePadCfg = padcfg;
-	if (DialogBox(demulInfo.hMainInstance, MAKEINTRESOURCE(IDD_DIALOG), GetActiveWindow(), (DLGPROC)Configure) == IDOK) {
+	if (DialogBox(demulInfo.hMainInstance, MAKEINTRESOURCE(IDD_PAD_DIALOG), GetActiveWindow(), (DLGPROC)Configure) == IDOK) {
 		padcfg = tunePadCfg;
 		padSaveConfig();
 		CalcJoyCaps();

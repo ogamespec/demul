@@ -1,6 +1,7 @@
 # Demul
 
-![demo1](imgstore/demo1.png) ![demo2](imgstore/demo2.png)
+|![demo1](imgstore/demo1.png) |![demo2](imgstore/demo2.png)|
+|---|---|
 
 Какие-то старые исходники. Удалось запустить BIOS.
 

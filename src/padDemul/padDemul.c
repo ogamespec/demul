@@ -16,7 +16,7 @@
 #include <windows.h>
 #include "device.h"
 #include "padConfig.h"
-#include "plugins.h"
+#include "Backends.h"
 
 int padOpen() {
 	if (!padOpenDevice()) {

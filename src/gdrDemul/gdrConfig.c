@@ -19,7 +19,7 @@
 #include "gdrConfig.h"
 #include "device.h"
 #include "inifile.h"
-#include "plugins.h"
+#include "Backends.h"
 
 GDR_CFG gdrcfg;
 

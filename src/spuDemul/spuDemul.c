@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include "spuRegs.h"
 #include "spudevice.h"
-#include "plugins.h"
+#include "Backends.h"
 
 int spuOpen(void *pspu) {
 	ARAM = pspu;

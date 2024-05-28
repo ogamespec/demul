@@ -22,8 +22,7 @@
 #include "gpuTransfer.h"
 #include "gputexture.h"
 #include "gpurenderer.h"
-
-#include "plugins.h"
+#include "Backends.h"
 #include "gpuConfig.h"
 
 #define MAX_PROFILE_COUNT 8

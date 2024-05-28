@@ -14,7 +14,7 @@
  */
 
 #include <windows.h>
-#include "plugins.h"
+#include "Backends.h"
 #include "memory.h"
 #include "gpu.h"
 #include "win32/configure.h"

@@ -18,7 +18,7 @@
 #include "debug.h"
 
 #include "sh4.h"
-#include "plugins.h"
+#include "Backends.h"
 #include "asic.h"
 #include "gdrom.h"
 #include "maple.h"

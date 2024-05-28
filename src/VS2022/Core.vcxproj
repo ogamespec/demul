@@ -45,7 +45,7 @@
     <ClCompile Include="..\mmu.c" />
     <ClCompile Include="..\modem.c" />
     <ClCompile Include="..\OnChip.c" />
-    <ClCompile Include="..\Plugins.c" />
+    <ClCompile Include="..\Backends.c" />
     <ClCompile Include="..\Rts.c" />
   </ItemGroup>
   <ItemGroup>
@@ -68,7 +68,7 @@
     <ClInclude Include="..\mmu.h" />
     <ClInclude Include="..\modem.h" />
     <ClInclude Include="..\OnChip.h" />
-    <ClInclude Include="..\Plugins.h" />
+    <ClInclude Include="..\Backends.h" />
     <ClInclude Include="..\Rts.h" />
     <ClInclude Include="..\Sh4.h" />
     <ClInclude Include="..\types.h" />

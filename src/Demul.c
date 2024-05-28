@@ -18,7 +18,7 @@
 #include "x86-32/dynarec.h"
 #include "arm.h"
 #include "gpu.h"
-#include "plugins.h"
+#include "Backends.h"
 #include "win32/configure.h"
 
 bool EmuRunning = false;

@@ -16,7 +16,7 @@
 #ifndef __DEMUL_H__
 #define __DEMUL_H__
 
-#include "plugins.h"
+#include "Backends.h"
 
 #define GPU_MODULE_NAME "gpuDemul"
 

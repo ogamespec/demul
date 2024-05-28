@@ -17,7 +17,7 @@
 #include "configure.h"
 #include "resource.h"
 #include "inifile.h"
-#include "plugins.h"
+#include "Backends.h"
 #include "crc32.h"
 #include "debug.h"
 #include "demul.h"

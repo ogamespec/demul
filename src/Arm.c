@@ -17,7 +17,7 @@
 #include <string.h>
 
 #include "demul.h"
-#include "plugins.h"
+#include "Backends.h"
 #include "counters.h"
 #include "memory.h"
 #include "aica.h"

@@ -16,7 +16,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "maple.h"
-#include "plugins.h"
 
 static u8 product_name[30] =
 {

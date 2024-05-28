@@ -16,7 +16,7 @@
 #include "gpu.h"
 #include "sh4.h"
 #include "asic.h"
-#include "plugins.h"
+#include "Backends.h"
 
 void gpuIrq(u32 code) {
 	hwInt(code);

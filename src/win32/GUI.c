@@ -20,7 +20,7 @@
 #include "resource.h"
 #include "console.h"
 #include "demul.h"
-#include "plugins.h"
+#include "Backends.h"
 #include "configure.h"
 
 DEmulInfo demulInfo;

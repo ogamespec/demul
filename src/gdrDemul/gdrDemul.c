@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include "device.h"
 #include "gdrConfig.h"
-#include "plugins.h"
+#include "Backends.h"
 
 int gdrOpen() {
 	if (!gdrLoadConfig(true))

@@ -20,7 +20,7 @@
 #include <string.h>
 #include <dinput.h>
 #include "win32/resource.h"
-#include "plugins.h"
+#include "Backends.h"
 #include "padConfig.h"
 #include "device.h"
 #include "inifile.h"

@@ -39,7 +39,6 @@
 #include "modem.h"
 #include "gaps.h"
 
-#include "plugins.h"
 #include "debug.h"
 #include "demul.h"
 

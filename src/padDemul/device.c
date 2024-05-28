@@ -19,7 +19,7 @@
 #include <dinput.h>
 #include "device.h"
 #include "padConfig.h"
-#include "plugins.h"
+#include "Backends.h"
 
 #define KEYDOWN(key) (keys[key] & 0x80)
 

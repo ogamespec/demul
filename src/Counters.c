@@ -22,7 +22,7 @@
 #include "arm.h"
 #include "counters.h"
 #include "gpu.h"
-#include "plugins.h"
+#include "Backends.h"
 #include "debug.h"
 
 void HBLANK(u32 cycle) {

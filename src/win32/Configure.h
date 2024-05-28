@@ -18,7 +18,7 @@
 
 #include <windows.h>
 #include "types.h"
-#include "plugins.h"
+#include "Backends.h"
 
 #define DEMUL_NAME "demul"
 #define MAX_DESCRIPTION 300

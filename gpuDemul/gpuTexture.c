@@ -22,7 +22,6 @@
 #include "gpuprim.h"
 #include "gputexture.h"
 #include "gpuregs.h"
-#include "config.h"
 #include "crc32.h"
 
 #define dump_t

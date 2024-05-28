@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\gpuDemul\Config.c" />
+    <ClCompile Include="..\gpuDemul\gpuConfig.c" />
     <ClCompile Include="..\gpuDemul\gpuDemul.c" />
     <ClCompile Include="..\gpuDemul\gpuPrim.c" />
     <ClCompile Include="..\gpuDemul\gpuRegs.c" />
@@ -30,7 +30,7 @@
     <ClCompile Include="..\gpuDemul\png.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\gpuDemul\Config.h" />
+    <ClInclude Include="..\gpuDemul\gpuConfig.h" />
     <ClInclude Include="..\gpuDemul\gpuDemul.h" />
     <ClInclude Include="..\gpuDemul\gpuPrim.h" />
     <ClInclude Include="..\gpuDemul\gpuRegs.h" />

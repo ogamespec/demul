@@ -15,7 +15,7 @@
 
 #include "gpuWnd.h"
 #include "gpurenderer.h"
-#include "config.h"
+#include "gpuConfig.h"
 #include "gputexture.h"
 #include "png.h"
 
@@ -57,7 +57,7 @@ int CreateGpuWindow() {
 	WindowRect.top = 0;
 	WindowRect.bottom = height;
 
-	if (cfg.fullScreen) {
+	if (gpucfg.fullScreen) {
 		memset(&dmScreenSettings, 0, sizeof(dmScreenSettings));
 		dmScreenSettings.dmSize = sizeof(dmScreenSettings);
 		dmScreenSettings.dmPelsWidth = width;

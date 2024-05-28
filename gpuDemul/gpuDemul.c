@@ -24,7 +24,7 @@
 #include "gpurenderer.h"
 
 #include "plugins.h"
-#include "config.h"
+#include "gpuConfig.h"
 
 #define MAX_PROFILE_COUNT 8
 
@@ -87,8 +87,8 @@ void gpuReset() {
 }
 
 void gpuConfigure() {
-	if (LoadConfig(false))
-		SetConfig();
+	if (gpuLoadConfig(false))
+		gpuSetConfig();
 }
 
 void gpuAbout() {

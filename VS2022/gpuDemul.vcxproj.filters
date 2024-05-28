@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\gpuDemul\Config.c">
+    <ClCompile Include="..\gpuDemul\gpuConfig.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\gpuDemul\gpuDemul.c">
@@ -44,7 +44,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\gpuDemul\Config.h">
+    <ClInclude Include="..\gpuDemul\gpuConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\gpuDemul\gpuDemul.h">

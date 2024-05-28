@@ -65,14 +65,14 @@ void CDECL SoundThreadProc(void *p) {
 		mainBufferPosition++;
 		if (mainBufferPosition >= TICKS_PER_SEC)
 			mainBufferPosition = 0;
-		DeviceSync();
+		spuDeviceSync();
 	}
 
 	soundThreadHandle = NULL;
 	_endthread();
 }
 
-void DeviceSync() {
+void spuDeviceSync() {
 	u32 i;
 	ChannelInfo *channelInfo;
 	u8 *ptr1;
@@ -140,7 +140,7 @@ void DeviceSync() {
 	IDirectSoundBuffer_Unlock(lpDSBS, ptr1, len1, ptr2, len2);
 }
 
-bool OpenDevice() {
+bool spuOpenDevice() {
 	int i;
 	DSBUFFERDESC dsbd;
 	DSBUFFERDESC dsbdesc;
@@ -210,7 +210,7 @@ bool OpenDevice() {
 	return true;
 }
 
-void CloseDevice() {
+void spuCloseDevice() {
 	int i;
 
 	if (soundThreadHandle != NULL) {

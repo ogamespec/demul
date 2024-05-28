@@ -36,10 +36,6 @@ typedef struct {
 	char biosFileName[MAX_PATH];
 	char flashFileName[MAX_PATH];
 
-	char spuPluginName[MAX_PATH];
-	char padPluginName[MAX_PATH];
-	char gpuPluginName[MAX_PATH];
-	char gdrPluginName[MAX_PATH];
 } CFG;
 
 extern CFG cfg;

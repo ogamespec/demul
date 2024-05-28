@@ -56,11 +56,11 @@ typedef struct {
 	TRACK_FULL TrackData[100];
 } TOC_FULL;
 
-int  OpenDevice(char *dev);
+int  gdrOpenDevice(char *dev);
 u32  GerStatusDevice();
 void ReadTOCDevice(u8 *buffef, u32 size);
 void ReadInfoSessionDevice(u8 *buffer, u32 session, u32 count);
-void ReadDevice(u8 *buffer, u32 size, u32 sector, u32 count, u32 flags);
-void CloseDevice();
+void gdrReadDevice(u8 *buffer, u32 size, u32 sector, u32 count, u32 flags);
+void gdrCloseDevice();
 
 #endif

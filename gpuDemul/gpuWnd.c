@@ -19,7 +19,7 @@
 #include "gputexture.h"
 #include "png.h"
 
-LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+LRESULT WINAPI GpuWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	switch (msg) {
 	case WM_CLOSE:
 		return TRUE;
@@ -83,7 +83,7 @@ int CreateGpuWindow() {
 	AdjustWindowRectEx(&WindowRect, dwStyle, FALSE, dwExStyle);
 
 	wc.lpszClassName = "WC";
-	wc.lpfnWndProc = WndProc;
+	wc.lpfnWndProc = GpuWndProc;
 	wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 	wc.hInstance = hinstance;
 	wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);

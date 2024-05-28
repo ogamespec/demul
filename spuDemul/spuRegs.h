@@ -41,12 +41,12 @@
 extern u8 REGS[0x10000];
 
 
-u8 FASTCALL spuRead8(u32 mem);
-u16 FASTCALL spuRead16(u32 mem);
-u32 FASTCALL spuRead32(u32 mem);
+u8 spuRead8(u32 mem);
+u16 spuRead16(u32 mem);
+u32 spuRead32(u32 mem);
 
-void FASTCALL spuWrite8(u32 mem, u8 value);
-void FASTCALL spuWrite16(u32 mem, u16 value);
-void FASTCALL spuWrite32(u32 mem, u32 value);
+void spuWrite8(u32 mem, u8 value);
+void spuWrite16(u32 mem, u16 value);
+void  spuWrite32(u32 mem, u32 value);
 
 #endif

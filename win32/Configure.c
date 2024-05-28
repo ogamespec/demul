@@ -23,14 +23,6 @@
 #include "demul.h"
 
 typedef struct {
-	char fileName[MAX_PATH];
-	char upFileName[MAX_PATH];
-	char name[MAX_PLUGIN_NAME + 1];
-	int type;
-	int comboIndex;
-} PluginInfo;
-
-typedef struct {
 	char description[MAX_DESCRIPTION];
 	u32 crc32;
 	u32 size;
@@ -51,19 +43,16 @@ DatInfo dats[] = {
 	{ "Dreamcast Flash Rom (US-Ntsc)", 0xc611b498, 131072 }
 };
 
-PluginInfo *plugins = NULL;
-int pluginsCount = 0;
 u8 *biosFileBuf = NULL;
 
 bool LoadConfig() {
-	char pluginFileName[MAX_PATH];
 	IniFile iniFile;
 
 	memset(&cfg, 0, sizeof(CFG));
 	if (!IniFile_open(&iniFile, DEMUL_NAME)) return false;
 
 	if (!IniFile_exist(&iniFile)) {
-		MessageBox(GetActiveWindow(), "BIOS & Plugins not configured", "Demul", MB_ICONINFORMATION);
+		MessageBox(GetActiveWindow(), "System Firmware not configured", "Demul", MB_ICONINFORMATION);
 		return SetConfig();
 	}
 
@@ -73,14 +62,6 @@ bool LoadConfig() {
 	memQuietMode(cfg.sh4mode);
 #endif
 
-	IniFile_getString(&iniFile, "plugins", "gdr", pluginFileName);
-	strUpCpy(cfg.gdrPluginName, pluginFileName);
-	IniFile_getString(&iniFile, "plugins", "gpu", pluginFileName);
-	strUpCpy(cfg.gpuPluginName, pluginFileName);
-	IniFile_getString(&iniFile, "plugins", "spu", pluginFileName);
-	strUpCpy(cfg.spuPluginName, pluginFileName);
-	IniFile_getString(&iniFile, "plugins", "pad", pluginFileName);
-	strUpCpy(cfg.padPluginName, pluginFileName);
 	IniFile_getString(&iniFile, "files", "bios", cfg.biosFileName);
 	IniFile_getString(&iniFile, "files", "flash", cfg.flashFileName);
 
@@ -92,10 +73,6 @@ void SaveConfig() {
 	if (!IniFile_open(&iniFile, DEMUL_NAME)) return;
 
 	IniFile_setLong(&iniFile, "main", "sh4mode", cfg.sh4mode);
-	IniFile_setString(&iniFile, "plugins", "gdr", cfg.gdrPluginName);
-	IniFile_setString(&iniFile, "plugins", "gpu", cfg.gpuPluginName);
-	IniFile_setString(&iniFile, "plugins", "spu", cfg.spuPluginName);
-	IniFile_setString(&iniFile, "plugins", "pad", cfg.padPluginName);
 	IniFile_setString(&iniFile, "files", "bios", cfg.biosFileName);
 	IniFile_setString(&iniFile, "files", "flash", cfg.flashFileName);
 }
@@ -112,51 +89,12 @@ void UpdateBIOSFilesInfo(HWND hwnd) {
 }
 
 BOOL CALLBACK Configure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-	int i;
-	int combo;
-	int selectedGdr;
-	int selectedGpu;
-	int selectedSpu;
-	int selectedPad;
 	OPENFILENAME openFileName;
 	char openFileBuf[MAX_PATH];
 
 	switch (msg) {
 	case WM_INITDIALOG:
 	{
-		if (pluginsCount != 0) {
-			selectedPad = selectedGpu = selectedSpu = selectedGdr = -1;
-			for (i = 0; i < pluginsCount; i++) {
-				switch (plugins[i].type) {
-				case PLUGIN_TYPE_GDR:
-					combo = IDC_BIOS_DIALOG_GDR;
-					if (strcmp(tuneCfg.gdrPluginName, plugins[i].upFileName) == 0)
-						selectedGdr = i;
-					break;
-				case PLUGIN_TYPE_GPU:
-					combo = IDC_BIOS_DIALOG_GPU;
-					if (strcmp(tuneCfg.gpuPluginName, plugins[i].upFileName) == 0)
-						selectedGpu = i;
-					break;
-				case PLUGIN_TYPE_SPU:
-					combo = IDC_BIOS_DIALOG_SPU;
-					if (strcmp(tuneCfg.spuPluginName, plugins[i].upFileName) == 0)
-						selectedSpu = i;
-					break;
-				case PLUGIN_TYPE_PAD:
-					combo = IDC_BIOS_DIALOG_PAD;
-					if (strcmp(tuneCfg.padPluginName, plugins[i].upFileName) == 0)
-						selectedPad = i;
-					break;
-				}
-				plugins[i].comboIndex = SendDlgItemMessage(hwnd, combo, CB_ADDSTRING, 0, (LPARAM)plugins[i].name);
-			}
-
-			SendDlgItemMessage(hwnd, IDC_BIOS_DIALOG_GDR, CB_SETCURSEL, selectedGdr != -1 ? plugins[selectedGdr].comboIndex : 0, 0);
-			SendDlgItemMessage(hwnd, IDC_BIOS_DIALOG_GPU, CB_SETCURSEL, selectedGpu != -1 ? plugins[selectedGpu].comboIndex : 0, 0);
-			SendDlgItemMessage(hwnd, IDC_BIOS_DIALOG_SPU, CB_SETCURSEL, selectedSpu != -1 ? plugins[selectedSpu].comboIndex : 0, 0);
-			SendDlgItemMessage(hwnd, IDC_BIOS_DIALOG_PAD, CB_SETCURSEL, selectedPad != -1 ? plugins[selectedPad].comboIndex : 0, 0);
-		}
 		UpdateBIOSFilesInfo(hwnd);
 		return TRUE;
 	}
@@ -191,35 +129,6 @@ BOOL CALLBACK Configure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 			}
 			break;
 		case IDOK:
-			selectedGdr = SendDlgItemMessage(hwnd, IDC_BIOS_DIALOG_GDR, CB_GETCURSEL, 0, 0);
-			selectedGpu = SendDlgItemMessage(hwnd, IDC_BIOS_DIALOG_GPU, CB_GETCURSEL, 0, 0);
-			selectedSpu = SendDlgItemMessage(hwnd, IDC_BIOS_DIALOG_SPU, CB_GETCURSEL, 0, 0);
-			selectedPad = SendDlgItemMessage(hwnd, IDC_BIOS_DIALOG_PAD, CB_GETCURSEL, 0, 0);
-			tuneCfg.gdrPluginName[0] = 0;
-			tuneCfg.gpuPluginName[0] = 0;
-			tuneCfg.spuPluginName[0] = 0;
-			tuneCfg.padPluginName[0] = 0;
-			for (i = 0; i < pluginsCount; i++) {
-				switch (plugins[i].type) {
-				case PLUGIN_TYPE_GDR:
-					if (plugins[i].comboIndex == selectedGdr)
-						strcpy(tuneCfg.gdrPluginName, plugins[i].upFileName);
-					break;
-				case PLUGIN_TYPE_GPU:
-					if (plugins[i].comboIndex == selectedGpu)
-						strcpy(tuneCfg.gpuPluginName, plugins[i].upFileName);
-					break;
-				case PLUGIN_TYPE_SPU:
-					if (plugins[i].comboIndex == selectedSpu)
-						strcpy(tuneCfg.spuPluginName, plugins[i].upFileName);
-					break;
-				case PLUGIN_TYPE_PAD:
-					if (plugins[i].comboIndex == selectedPad)
-						strcpy(tuneCfg.padPluginName, plugins[i].upFileName);
-					break;
-				}
-			}
-
 			EndDialog(hwnd, 1);
 			return TRUE;
 
@@ -244,61 +153,8 @@ HMODULE SafeLoadLibrary(char *name) {
 	return result;
 }
 
-void EnumPlugins() {
-	WIN32_FIND_DATA findFileData;
-	HANDLE hFind;
-	HMODULE hModule;
-	_getType getType = NULL;
-	_getName getName = NULL;
-	PluginInfo *cur;
-	char *szTemp;
-	char searchPath[MAX_PATH];
-
-	free(plugins);
-	plugins = NULL;
-	pluginsCount = 0;
-
-
-	GetModuleFileName(GetModuleHandle(NULL), searchPath, sizeof(searchPath));
-	szTemp = strrchr(searchPath, '\\');
-	if (szTemp == NULL) return;
-	szTemp++;
-	strcpy(szTemp, "*.*");
-
-	hFind = FindFirstFile(searchPath, &findFileData);
-	if (hFind == INVALID_HANDLE_VALUE) {
-		return;
-	}
-
-	do {
-		if ((findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == FILE_ATTRIBUTE_DIRECTORY) continue;
-		hModule = SafeLoadLibrary(findFileData.cFileName);
-		if (hModule == NULL) continue;
-		getType = (_getType)GetProcAddress(hModule, "getType");
-		getName = (_getName)GetProcAddress(hModule, "getName");
-		if ((getType == NULL) || (getName == NULL)) {
-			FreeLibrary(hModule);
-			continue;
-		}
-
-
-		pluginsCount++;
-		plugins = realloc(plugins, pluginsCount * sizeof(*plugins));
-		cur = &plugins[pluginsCount - 1];
-		strncpy(cur->name, getName(), MAX_PLUGIN_NAME);
-		cur->name[MAX_PLUGIN_NAME] = 0;
-		cur->type = getType();
-
-		strcpy(cur->fileName, findFileData.cFileName);
-		strUpCpy(cur->upFileName, cur->fileName);
-	} while (FindNextFile(hFind, &findFileData) != 0);
-
-	FindClose(hFind);
-}
-
 bool SetConfig() {
 	tuneCfg = cfg;
-	EnumPlugins();
 	biosFileBuf = (u8*)malloc(BIOS_SIZE);
 	if (DialogBox(demulInfo.hMainInstance, MAKEINTRESOURCE(IDD_BIOS_AND_PLUGINS), GetActiveWindow(), (DLGPROC)Configure) == IDOK) {
 		free(biosFileBuf);

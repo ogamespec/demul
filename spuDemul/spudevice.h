@@ -22,10 +22,10 @@
 
 extern u8   *ARAM;
 
-bool OpenDevice();
-void CloseDevice();
+bool spuOpenDevice();
+void spuCloseDevice();
 
-void DeviceSync();
+void spuDeviceSync();
 
 #define ARAM8(x)    (*(u8*)&ARAM[(x) & 0x001fffff])
 #define ARAM16(x)   (*(u16*)&ARAM[(x) & 0x001fffff])

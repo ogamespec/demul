@@ -27,7 +27,7 @@
 u8 REGS[0x10000];
 u32 renderingison;
 
-u32 FASTCALL gpuRead32(u32 mem);
-void FASTCALL gpuWrite32(u32 mem, u32 value);
+u32 gpuRead32(u32 mem);
+void gpuWrite32(u32 mem, u32 value);
 
 #endif

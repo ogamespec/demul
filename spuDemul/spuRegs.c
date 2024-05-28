@@ -54,7 +54,7 @@ INLINE static void CalcFrequency(ChannelInfo *currentChannel)
     }
 }
 */
-u8 FASTCALL spuRead8(u32 mem) {
+u8 spuRead8(u32 mem) {
 	switch (mem & 0xffff) {
 	case 0x2808:    return 0x00;
 	case 0x2809:    return 0x1;
@@ -65,7 +65,7 @@ u8 FASTCALL spuRead8(u32 mem) {
 	}
 }
 
-u16 FASTCALL spuRead16(u32 mem) {
+u16 spuRead16(u32 mem) {
 	switch (mem & 0xffff) {
 	case 0x2808:    return 0x100;
 	case 0x2814: {
@@ -75,7 +75,7 @@ u16 FASTCALL spuRead16(u32 mem) {
 	}
 }
 
-u32 FASTCALL spuRead32(u32 mem) {
+u32 spuRead32(u32 mem) {
 	switch (mem & 0xffff) {
 	case 0x2808:    return 0x100;
 	case 0x2814:    return channels[REGS8(0x280d) & 0x3f].position;
@@ -117,7 +117,7 @@ void writeChannel(ChannelInfo *channelInfo, u32 channelMem, u8 value) {
 		break;
 	}
 }
-void FASTCALL spuWrite8(u32 mem, u8 value) {
+void spuWrite8(u32 mem, u8 value) {
 	u32 channelIdx;
 	u32 channelMem;
 	ChannelInfo *channelInfo;
@@ -131,7 +131,7 @@ void FASTCALL spuWrite8(u32 mem, u8 value) {
 	}
 }
 
-void FASTCALL spuWrite16(u32 mem, u16 value) {
+void spuWrite16(u32 mem, u16 value) {
 	u32 channelIdx;
 	u32 channelMem;
 	ChannelInfo *channelInfo;
@@ -146,7 +146,7 @@ void FASTCALL spuWrite16(u32 mem, u16 value) {
 	}
 }
 
-void FASTCALL spuWrite32(u32 mem, u32 value) {
+void spuWrite32(u32 mem, u32 value) {
 	u32 channelIdx;
 	u32 channelMem;
 	ChannelInfo *channelInfo;

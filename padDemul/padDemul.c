@@ -21,20 +21,7 @@
 HINSTANCE hinstance;
 DEmulInfo *gDemulInfo = NULL;
 
-BOOL APIENTRY DllMain(HANDLE hModule, DWORD dwReason, LPVOID lpReserved) {
-	hinstance = (HINSTANCE)hModule;
-	return TRUE;
-}
-
-u32 FASTCALL getType() {
-	return PLUGIN_TYPE_PAD;
-}
-
-char* FASTCALL getName() {
-	return PAD_MODULE_NAME;
-}
-
-u32 FASTCALL padOpen(DEmulInfo *demulInfo) {
+int padOpen(DEmulInfo *demulInfo) {
 	gDemulInfo = demulInfo;
 	if (!OpenDevice()) {
 		CloseDevice();
@@ -47,14 +34,14 @@ u32 FASTCALL padOpen(DEmulInfo *demulInfo) {
 	return 1;
 }
 
-void FASTCALL padClose() {
+void padClose() {
 	CloseDevice();
 }
 
-void FASTCALL padReset() {
+void padReset() {
 }
 
-void FASTCALL padConfigure() {
+void padConfigure() {
 	bool wasOpened = IsOpened();
 	if (!wasOpened) {
 		if (!OpenDevice()) {
@@ -73,13 +60,13 @@ void FASTCALL padConfigure() {
 		CloseDevice();
 }
 
-void FASTCALL padAbout() {
+void padAbout() {
 }
 
-u32 FASTCALL padJoyCaps(u32 port) {
+u32 padJoyCaps(u32 port) {
 	return /*0xfe060f00*/ JoyCaps[port];
 }
 
-void FASTCALL padReadJoy(u8 *keymask, u32 port) {
+void padReadJoy(u8 *keymask, u32 port) {
 	GetControllerDevice((CONTROLLER*)keymask, port);
 }

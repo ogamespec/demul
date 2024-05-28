@@ -21,41 +21,28 @@
 
 HINSTANCE hinstance;
 
-BOOL APIENTRY DllMain(HANDLE hModule, DWORD dwReason, LPVOID lpReserved) {
-	hinstance = (HINSTANCE)hModule;
-	return TRUE;
-}
-
-u32 FASTCALL getType() {
-	return PLUGIN_TYPE_SPU;
-}
-
-char* FASTCALL getName() {
-	return "spuDemul";
-}
-
-u32 FASTCALL spuOpen(DEmulInfo *demulInfo, void *pspu) {
+int spuOpen(DEmulInfo *demulInfo, void *pspu) {
 	ARAM = pspu;
-	if (!OpenDevice()) {
-		CloseDevice();
+	if (!spuOpenDevice()) {
+		spuCloseDevice();
 		return 0;
 	}
 	return 1;
 }
 
-void FASTCALL spuClose() {
-	CloseDevice();
+void spuClose() {
+	spuCloseDevice();
 	ARAM = NULL;
 }
 
-void FASTCALL spuReset() {
+void spuReset() {
 }
 
-void FASTCALL spuConfigure() {
+void spuConfigure() {
 }
 
-void FASTCALL spuAbout() {
+void spuAbout() {
 }
-void FASTCALL spuSync(u32 samples) {
-	//DeviceSync(samples);
+void spuSync(u32 samples) {
+	//spuDeviceSync(samples);
 }

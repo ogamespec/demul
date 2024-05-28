@@ -30,10 +30,6 @@ int OpenEmu() {
 	if (!LoadConfig())
 		return false;
 
-	while (!loadPlugins()) {
-		if (!SetConfig())
-			return false;
-	}
 	while (memOpen() == 0) {
 		if (!SetConfig())
 			return false;
@@ -63,7 +59,6 @@ void CloseEmu() {
 	if (EmuRunning)
 		closePlugins();
 
-	unloadPlugins();
 	#ifdef DEMUL_DEBUG
 	closeDebug();
 	#endif

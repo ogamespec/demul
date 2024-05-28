@@ -22,10 +22,10 @@
 u32 listtype;
 int completed;
 
-void (FASTCALL *IRQ)(int irq);
+void (*IRQ)(int irq);
 
-void FASTCALL gpuTaTransfer(u32 *mem, u32 size);
-void FASTCALL gpuYuvTransfer(u8 *src, u8 *dst);
+void gpuTaTransfer(u32 *mem, u32 size);
+void gpuYuvTransfer(u8 *src, u8 *dst);
 void gpuBackground(u32 *mem);
 
 #endif

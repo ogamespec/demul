@@ -197,7 +197,7 @@ void sendSprite(u32 *mem) {
 	else sendPrimStart = SPRITE_NT;
 }
 
-void FASTCALL gpuTaTransfer(u32 *mem, u32 size) {
+void gpuTaTransfer(u32 *mem, u32 size) {
 	for (; size != 0; mem += 8, size -= 32) {
 		if (sendPrimEnd != NULL) {
 			sendPrimEnd(mem);
@@ -214,7 +214,7 @@ void FASTCALL gpuTaTransfer(u32 *mem, u32 size) {
 	}
 }
 
-void FASTCALL gpuYuvTransfer(u8 *src, u8 *dst) {
+void gpuYuvTransfer(u8 *src, u8 *dst) {
 	u32 tex_ctrl = REGS32(0x814c);
 	u8 yuvu = ((tex_ctrl >> 0) & 0x3f) + 1;
 	u8 yuvv = ((tex_ctrl >> 8) & 0x3f) + 1;

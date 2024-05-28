@@ -22,53 +22,40 @@
 HINSTANCE hinstance;
 HWND hWnd;
 
-BOOL APIENTRY DllMain(HANDLE hModule, DWORD dwReason, LPVOID lpReserved) {
-	hinstance = (HINSTANCE)hModule;
-	return TRUE;
-}
-
-u32 FASTCALL getType() {
-	return PLUGIN_TYPE_GDR;
-}
-
-char* FASTCALL getName() {
-	return "gdrDemul";
-}
-
-u32 FASTCALL gdrOpen(DEmulInfo *demulInfo) {
+int gdrOpen(DEmulInfo *demulInfo) {
 	if (!LoadConfig(true))
 		return 0;
-	return OpenDevice(cfg.drive);
+	return gdrOpenDevice(cfg.drive);
 }
 
-void FASTCALL gdrClose() {
-	CloseDevice();
+void gdrClose() {
+	gdrCloseDevice();
 }
 
-void FASTCALL gdrReset() {
+void gdrReset() {
 }
 
-void FASTCALL gdrConfigure() {
+void gdrConfigure() {
 	if (LoadConfig(false))
 		SetConfig();
 }
 
-void FASTCALL gdrAbout() {
+void gdrAbout() {
 }
 
-u32 FASTCALL gdrGetStatus() {
+u32 gdrGetStatus() {
 	return GerStatusDevice();
 }
 
-void FASTCALL gdrReadTOC(u8 *buffer, u32 size) {
+void gdrReadTOC(u8 *buffer, u32 size) {
 	ReadTOCDevice(buffer, size);
 }
 
-void FASTCALL gdrReadInfoSession(u8 *buffer, u32 session, u32 size) {
+void gdrReadInfoSession(u8 *buffer, u32 session, u32 size) {
 	ReadInfoSessionDevice(buffer, session, size);
 }
 
-void FASTCALL gdrReadSectors(u8 *buffer, u32 sector, u32 count, u32 mode) {
+void gdrReadSectors(u8 *buffer, u32 sector, u32 count, u32 mode) {
 	u32 flags;
 	u32 sSize;
 
@@ -92,7 +79,7 @@ void FASTCALL gdrReadSectors(u8 *buffer, u32 sector, u32 count, u32 mode) {
 			sCount = count;
 		}
 
-		ReadDevice(buffer, size, sector, sCount, flags);
+		gdrReadDevice(buffer, size, sector, sCount, flags);
 
 		if ((s32)(count -= MAX_SECTOR) <= 0) break;
 		sector += MAX_SECTOR;

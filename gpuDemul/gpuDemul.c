@@ -31,9 +31,6 @@
 static LARGE_INTEGER start[MAX_PROFILE_COUNT];
 static LARGE_INTEGER finish[MAX_PROFILE_COUNT];
 
-HINSTANCE hinstance = NULL;
-DEmulInfo *gDemulInfo = NULL;
-
 void ProfileStart(int n) {
 	QueryPerformanceCounter(&start[n]);
 }
@@ -57,22 +54,8 @@ void DEMUL_printf(char *format, ...) {
 	va_end(ap);
 }
 
-BOOL APIENTRY DllMain(HANDLE hModule, DWORD dwReason, LPVOID lpReserved) {
-	hinstance = (HINSTANCE)hModule;
-	return TRUE;
-}
-
-u32 FASTCALL getType() {
-	return PLUGIN_TYPE_GPU;
-}
-
-char* FASTCALL getName() {
-	return GPU_MODULE_NAME;
-}
-
-int FASTCALL gpuOpen(DEmulInfo *demulInfo, void *pgpu) {
-	gDemulInfo = demulInfo;
-
+int gpuOpen(DEmulInfo *demulInfo, void *pgpu) {
+	
 	if (!LoadConfig(true))
 		return 0;
 
@@ -90,21 +73,21 @@ int FASTCALL gpuOpen(DEmulInfo *demulInfo, void *pgpu) {
 	return 1;
 }
 
-void FASTCALL gpuClose() {
+void gpuClose() {
 	DeleteOpenGL();
 	ClearTextures();
 	CloseGpuWindow();
 }
 
-void FASTCALL gpuReset() {
+void gpuReset() {
 }
 
-void FASTCALL gpuConfigure() {
+void gpuConfigure() {
 	if (LoadConfig(false))
 		SetConfig();
 }
 
-void FASTCALL gpuAbout() {
+void gpuAbout() {
 }
 
 int fps;
@@ -112,7 +95,7 @@ time_t t;
 char szTitle[256];
 extern float angle;
 
-void FASTCALL gpuSync() {
+void gpuSync() {
 	MSG msg;
 
 	while (PeekMessage(&msg, gDemulInfo->hGpuWnd, 0, 0, PM_REMOVE)) {
@@ -143,6 +126,6 @@ void FASTCALL gpuSync() {
 	}
 }
 
-void FASTCALL gpuSetIrqHandler(void (*Handler)) {
+void gpuSetIrqHandler(void (*Handler)) {
 	IRQ = Handler;
 }

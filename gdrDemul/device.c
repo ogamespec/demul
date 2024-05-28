@@ -210,7 +210,7 @@ void ReadInfoDevice() {
 	}
 }
 
-int OpenDevice(char *dev) {
+int gdrOpenDevice(char *dev) {
 	char buf[256];
 
 	if ((GetDriveType(dev) != DRIVE_CDROM))
@@ -248,7 +248,7 @@ u32 GerStatusDevice() {
 	return 0x22;
 }
 
-void ReadDevice(u8 *buffer, u32 size, u32 sector, u32 count, u32 flags) {
+void gdrReadDevice(u8 *buffer, u32 size, u32 sector, u32 count, u32 flags) {
 	SCSI_PASS_THROUGH_DIRECT srb;
 	DWORD BytesReturned;
 
@@ -299,7 +299,7 @@ void ReadDevice(u8 *buffer, u32 size, u32 sector, u32 count, u32 flags) {
 		);
 }
 
-void CloseDevice() {
+void gdrCloseDevice() {
 	if (hDev != INVALID_HANDLE_VALUE)
 		CloseHandle(hDev);
 }

@@ -185,7 +185,7 @@ static const char *get_reg_name(u32 reg) {
 #endif
 
 
-u32 FASTCALL gpuRead32(u32 mem) {
+u32 gpuRead32(u32 mem) {
 	#ifdef REGS_DEBUG
 	DEMUL_printf("READF FROM REG[%04x]=%08x; %s\n", mem & 0xFFFF, REGS32(mem & 0xFFFF), get_reg_name(mem & 0xFFFF));
 	#endif
@@ -197,7 +197,7 @@ u32 FASTCALL gpuRead32(u32 mem) {
 	}
 }
 
-void FASTCALL gpuWrite32(u32 mem, u32 value) {
+void gpuWrite32(u32 mem, u32 value) {
 	REGS32(mem & 0xffff) = value;
 
 	#ifdef REGS_DEBUG

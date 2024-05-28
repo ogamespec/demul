@@ -42,6 +42,19 @@ BEGIN
 END
 
 
+IDD_GDR_DIALOG DIALOGEX 0, 0, 186, 90
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Configure"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,28,51,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,108,51,50,14
+    COMBOBOX        IDC_GDR_COMBO,29,18,129,213,CBS_DROPDOWNLIST | CBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Icon

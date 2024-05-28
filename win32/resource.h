@@ -10,6 +10,7 @@
 #define IDR_MENU                        102
 #define IDD_BIOS_AND_PLUGINS            103
 #define IDI_MAIN_ICON                   104
+#define IDD_GDR_DIALOG                  105
 #define IDC_BIOS_DIALOG_GPU             1001
 #define IDC_BIOS_DIALOG_SPU             1002
 #define IDC_BIOS_DIALOG_GDR             1003
@@ -20,6 +21,7 @@
 #define IDC_BIOS_DIALOG_FLASH           1008
 #define IDC_BIOS_DIALOG_FLASH_DESCRIPTION 1009
 #define IDC_BIOS_DIALOG_FLASH_SELECT    1010
+#define IDC_GDR_COMBO                   1011
 #define IDR_EMU_RUN                     40001
 #define ID_CONFIG_PAD                   40002
 #define ID_CONFIG_GPU                   40003
@@ -38,7 +40,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        105
+#define _APS_NEXT_RESOURCE_VALUE        106
 #define _APS_NEXT_COMMAND_VALUE         40013
 #define _APS_NEXT_CONTROL_VALUE         1012
 #define _APS_NEXT_SYMED_VALUE           101

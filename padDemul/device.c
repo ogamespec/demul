@@ -23,8 +23,6 @@
 
 #define KEYDOWN(key) (keys[key] & 0x80)
 
-extern DEmulInfo* padDemulInfo;
-
 LPDIRECTINPUT8 lpDI = NULL;
 LPDIRECTINPUTDEVICE8 lpDIKeyboard = NULL;
 LPDIRECTINPUTDEVICE8 lpDIJoystick[MAX_JOYS] = { NULL };
@@ -82,7 +80,7 @@ bool padOpenDevice() {
 	for (i = 0; i < MAX_JOYS; i++)
 		lpDIJoystick[i] = NULL;
 
-	hr = DirectInput8Create(padDemulInfo->hMainInstance, DIRECTINPUT_VERSION, &IID_IDirectInput8A, &lpDI, NULL);
+	hr = DirectInput8Create(demulInfo.hMainInstance, DIRECTINPUT_VERSION, &IID_IDirectInput8A, &lpDI, NULL);
 	if (hr != DI_OK)
 		return 0;
 
@@ -92,12 +90,10 @@ bool padOpenDevice() {
 		return 0;
 	}
 
-	if (padDemulInfo) {
-		hr = IDirectInputDevice8_SetCooperativeLevel(lpDIKeyboard, padDemulInfo->hGpuWnd, DISCL_NONEXCLUSIVE | DISCL_FOREGROUND);
-		if (hr != DI_OK) {
-			MessageBox(GetActiveWindow(), "IDirectInputDevice8_SetCooperativeLevel FAILED", "padDemul", MB_OK);
-			return 0;
-		}
+	hr = IDirectInputDevice8_SetCooperativeLevel(lpDIKeyboard, demulInfo.hGpuWnd, DISCL_NONEXCLUSIVE | DISCL_FOREGROUND);
+	if (hr != DI_OK) {
+		MessageBox(GetActiveWindow(), "IDirectInputDevice8_SetCooperativeLevel FAILED", "padDemul", MB_OK);
+		return 0;
 	}
 
 	hr = IDirectInputDevice8_SetDataFormat(lpDIKeyboard, &c_dfDIKeyboard);
@@ -275,7 +271,7 @@ void GetControllerDevice(CONTROLLER *controller, u32 port) {
 	if (!padReadDevice()) return;
 
 	if (KEYDOWN(DIK_ESCAPE) != 0)
-		PostMessage(padDemulInfo->hMainWnd, WM_QUIT, 0, 0);
+		PostMessage(demulInfo.hMainWnd, WM_QUIT, 0, 0);
 
 #define CHECK_KEY(key, mask) \
 	if (CheckKeyPressed(key)) controller->joyButtons &= ~mask; else

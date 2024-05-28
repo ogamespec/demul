@@ -18,10 +18,7 @@
 #include "padConfig.h"
 #include "plugins.h"
 
-DEmulInfo* padDemulInfo;
-
-int padOpen(DEmulInfo *demulInfo) {
-	padDemulInfo = demulInfo;
+int padOpen() {
 	if (!padOpenDevice()) {
 		padCloseDevice();
 		return 0;

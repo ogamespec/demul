@@ -102,7 +102,7 @@ int InitialOpenGL() {
 		0, 0, 0								// layer masks ignored
 	};
 
-	if ((hdc = GetDC(gpuDemulInfo->hGpuWnd)) == 0) {
+	if ((hdc = GetDC(demulInfo.hGpuWnd)) == 0) {
 		MessageBox(NULL, "GetDC failed", "Error", MB_OK);
 		DeleteOpenGL();
 		return 0;
@@ -172,7 +172,7 @@ void DeleteOpenGL() {
 	}
 
 	if (hdc) {
-		ReleaseDC(gpuDemulInfo->hGpuWnd, hdc);
+		ReleaseDC(demulInfo.hGpuWnd, hdc);
 		hdc = NULL;
 	}
 }

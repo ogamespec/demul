@@ -24,6 +24,4 @@ void DEMUL_printf(char *format, ...);
 void ProfileStart(int n);
 void ProfileFinish(int n);
 
-extern DEmulInfo *gpuDemulInfo;
-
 #endif

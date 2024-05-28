@@ -22,26 +22,26 @@
 bool openPlugins() {
 	int st;
 
-	st = gpuOpen(&demulInfo, pgpu);
+	st = gpuOpen(pgpu);
 	if (st == 0) {
 		closePlugins();
 		return false;
 	}
 	gpuSetIrqHandler((void*)gpuIrq);
 
-	st = gdrOpen(&demulInfo);
+	st = gdrOpen();
 	if (st == 0) {
 		closePlugins();
 		return false;
 	}
 
-	st = padOpen(&demulInfo);
+	st = padOpen();
 	if (st == 0) {
 		closePlugins();
 		return false;
 	}
 
-	st = spuOpen(&demulInfo, pspu);
+	st = spuOpen(pspu);
 	if (st == 0) {
 		closePlugins();
 		return false;

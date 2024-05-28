@@ -15,14 +15,13 @@
 
 #include <windows.h>
 #include <stdio.h>
-#include "resource.h"
+#include "win32/resource.h"
 #include "gdrConfig.h"
 #include "device.h"
 #include "inifile.h"
 #include "plugins.h"
 
 GDR_CFG gdrcfg;
-extern DEmulInfo* gdrDemulInfo;
 
 static BOOL CALLBACK Configure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	switch (msg) {
@@ -37,11 +36,11 @@ static BOOL CALLBACK Configure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			sprintf(name, "%c:", i);
 			if ((GetDriveType(name) != DRIVE_CDROM))
 				continue;
-			idx = SendDlgItemMessage(hWnd, IDC_COMBO, CB_ADDSTRING, 0, (LPARAM)name);
+			idx = SendDlgItemMessage(hWnd, IDC_GDR_COMBO, CB_ADDSTRING, 0, (LPARAM)name);
 			if (toupper(i) == toupper(gdrcfg.drive[0]))
 				selectedIdx = idx;
 		}
-		SendDlgItemMessage(hWnd, IDC_COMBO, CB_SETCURSEL, selectedIdx, 0);
+		SendDlgItemMessage(hWnd, IDC_GDR_COMBO, CB_SETCURSEL, selectedIdx, 0);
 
 		return TRUE;
 	}
@@ -52,7 +51,7 @@ static BOOL CALLBACK Configure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		{
 			char drive[8];
 
-			SendDlgItemMessage(hWnd, IDC_COMBO, WM_GETTEXT, 5, (LPARAM)drive);
+			SendDlgItemMessage(hWnd, IDC_GDR_COMBO, WM_GETTEXT, 5, (LPARAM)drive);
 			strcpy(gdrcfg.drive, drive);
 			EndDialog(hWnd, 1);
 			break;
@@ -71,7 +70,7 @@ static BOOL CALLBACK Configure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 
 bool gdrSetConfig() {
-	if ((DialogBox(gdrDemulInfo->hMainInstance, MAKEINTRESOURCE(IDD_DIALOG), GetActiveWindow(), (DLGPROC)Configure)) == IDOK) {
+	if ((DialogBox(demulInfo.hMainInstance, MAKEINTRESOURCE(IDD_GDR_DIALOG), GetActiveWindow(), (DLGPROC)Configure)) == IDOK) {
 		gdrSaveConfig();
 		return true;
 	}

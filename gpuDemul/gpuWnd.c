@@ -85,7 +85,7 @@ int CreateGpuWindow() {
 	wc.lpszClassName = "WC";
 	wc.lpfnWndProc = GpuWndProc;
 	wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-	wc.hInstance = gpuDemulInfo->hMainInstance;
+	wc.hInstance = demulInfo.hMainInstance;
 	wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
@@ -96,7 +96,7 @@ int CreateGpuWindow() {
 	if (!RegisterClass(&wc))
 		return 0;
 
-	if (!(gpuDemulInfo->hGpuWnd = CreateWindowEx(dwExStyle,
+	if (!(demulInfo.hGpuWnd = CreateWindowEx(dwExStyle,
 											   "WC",
 											   "GPU PLUGIN", dwStyle
 											   ,
@@ -106,20 +106,20 @@ int CreateGpuWindow() {
 											   height + GetSystemMetrics(SM_CXFIXEDFRAME) * 2 + GetSystemMetrics(SM_CYCAPTION) + 2,
 											   NULL,
 											   NULL,
-											   gpuDemulInfo->hMainInstance,
+											   demulInfo.hMainInstance,
 											   NULL
 											   )
 		  )) return 0;
 
-	UnregisterClass("WC", gpuDemulInfo->hMainInstance);
-	ShowWindow(gpuDemulInfo->hGpuWnd, SW_SHOWNORMAL);
-	UpdateWindow(gpuDemulInfo->hGpuWnd);
+	UnregisterClass("WC", demulInfo.hMainInstance);
+	ShowWindow(demulInfo.hGpuWnd, SW_SHOWNORMAL);
+	UpdateWindow(demulInfo.hGpuWnd);
 
 	return 1;
 }
 
 void CloseGpuWindow() {
-	if (gpuDemulInfo->hGpuWnd != NULL)
-		DestroyWindow(gpuDemulInfo->hGpuWnd);
-	gpuDemulInfo->hGpuWnd = NULL;
+	if (demulInfo.hGpuWnd != NULL)
+		DestroyWindow(demulInfo.hGpuWnd);
+	demulInfo.hGpuWnd = NULL;
 }

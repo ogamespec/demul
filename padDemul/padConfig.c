@@ -25,8 +25,6 @@
 #include "device.h"
 #include "inifile.h"
 
-extern DEmulInfo* padDemulInfo;
-
 PadControl padControls[4] =
 {
 	{ IDC_EUPP1, IDC_EDOWNP1, IDC_ELEFTP1, IDC_ERIGHTP1, IDC_EAP1, IDC_EBP1, IDC_ECP1, IDC_EDP1, IDC_EXP1, IDC_EYP1, IDC_EZP1, IDC_ELTRIGP1, IDC_ERTRIGP1, IDC_ESTARTP1, IDC_ES1UPP1, IDC_ES1DOWNP1, IDC_ES1LEFTP1, IDC_ES1RIGHTP1, IDC_ES2UPP1, IDC_ES2DOWNP1, IDC_ES2LEFTP1, IDC_ES2RIGHTP1,
@@ -705,7 +703,7 @@ bool padSetConfig() {
 	key = NULL;
 
 	tunePadCfg = padcfg;
-	if (DialogBox(padDemulInfo->hMainInstance, MAKEINTRESOURCE(IDD_DIALOG), GetActiveWindow(), (DLGPROC)Configure) == IDOK) {
+	if (DialogBox(demulInfo.hMainInstance, MAKEINTRESOURCE(IDD_DIALOG), GetActiveWindow(), (DLGPROC)Configure) == IDOK) {
 		padcfg = tunePadCfg;
 		padSaveConfig();
 		CalcJoyCaps();

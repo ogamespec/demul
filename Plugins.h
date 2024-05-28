@@ -27,10 +27,12 @@ typedef struct DEmulInfo {
 	HWND hGpuWnd;
 } DEmulInfo;
 
+extern DEmulInfo demulInfo;
+
 bool  openPlugins();
 void closePlugins();
 
-int gpuOpen(DEmulInfo *demulInfo, void* pgpu);
+int gpuOpen(void* pgpu);
 void gpuClose();
 void gpuReset();
 void gpuConfigure();
@@ -41,7 +43,7 @@ void gpuSetIrqHandler(void (*Handler));
 void gpuTaTransfer(u32 *mem, u32 size);
 void gpuYuvTransfer(u8 *src, u8 *dst);
 
-int gdrOpen(DEmulInfo *demulInfo);
+int gdrOpen();
 void gdrClose();
 void gdrReset();
 void gdrConfigure();
@@ -50,14 +52,14 @@ void gdrReadInfoSession(u8 *buffer, u32 session, u32 size);
 u32 gdrGetStatus();
 void gdrReadSectors(u8 *buffer, u32 sector, u32 count, u32 mode);
 
-int padOpen(DEmulInfo *demulInfo);
+int padOpen();
 void padClose();
 void padReset();
 void padConfigure();
 u32 padJoyCaps(u32 port);
 void padReadJoy(u8 *keymask, u32 port);
 
-int spuOpen(DEmulInfo *demulInfo, void *pspu);
+int spuOpen(void *pspu);
 void spuClose();
 void spuReset();
 void spuConfigure();

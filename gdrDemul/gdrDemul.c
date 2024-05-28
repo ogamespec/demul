@@ -19,10 +19,7 @@
 #include "gdrConfig.h"
 #include "plugins.h"
 
-DEmulInfo* gdrDemulInfo;
-
-int gdrOpen(DEmulInfo *demulInfo) {
-	gdrDemulInfo = demulInfo;
+int gdrOpen() {
 	if (!gdrLoadConfig(true))
 		return 0;
 	return gdrOpenDevice(gdrcfg.drive);

@@ -19,7 +19,7 @@
 #include "spudevice.h"
 #include "plugins.h"
 
-int spuOpen(DEmulInfo *demulInfo, void *pspu) {
+int spuOpen(void *pspu) {
 	ARAM = pspu;
 	if (!spuOpenDevice()) {
 		spuCloseDevice();

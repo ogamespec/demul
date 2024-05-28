@@ -16,13 +16,16 @@
 #include <windows.h>
 #include <stdio.h>
 #include "device.h"
-#include "config.h"
+#include "gdrConfig.h"
 #include "plugins.h"
 
+DEmulInfo* gdrDemulInfo;
+
 int gdrOpen(DEmulInfo *demulInfo) {
-	if (!LoadConfig(true))
+	gdrDemulInfo = demulInfo;
+	if (!gdrLoadConfig(true))
 		return 0;
-	return gdrOpenDevice(cfg.drive);
+	return gdrOpenDevice(gdrcfg.drive);
 }
 
 void gdrClose() {
@@ -33,8 +36,8 @@ void gdrReset() {
 }
 
 void gdrConfigure() {
-	if (LoadConfig(false))
-		SetConfig();
+	if (gdrLoadConfig(false))
+		gdrSetConfig();
 }
 
 void gdrAbout() {

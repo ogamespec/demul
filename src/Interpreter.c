@@ -22,6 +22,7 @@
 #include "onchip.h"
 #include "cache.h"
 #include "mmu.h"
+#include "Backends.h"
 
 static bool NEED_INTERRUPTS_TEST;
 static s32 iount;

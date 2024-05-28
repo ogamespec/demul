@@ -19,10 +19,11 @@
 #include "plugins.h"
 
 #define GPU_MODULE_NAME "gpuDemul"
+
 void DEMUL_printf(char *format, ...);
 void ProfileStart(int n);
 void ProfileFinish(int n);
-extern HINSTANCE hinstance;
-extern DEmulInfo *gDemulInfo;
+
+extern DEmulInfo *gpuDemulInfo;
 
 #endif

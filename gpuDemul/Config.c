@@ -83,7 +83,7 @@ BOOL CALLBACK Configure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 bool SetConfig() {
 	CFG backUp;
 	backUp = cfg;
-	if (DialogBox(hinstance, MAKEINTRESOURCE(IDD_DIALOG), GetActiveWindow(), (DLGPROC)Configure) == IDOK) {
+	if (DialogBox(gpuDemulInfo->hMainInstance, MAKEINTRESOURCE(IDD_DIALOG), GetActiveWindow(), (DLGPROC)Configure) == IDOK) {
 		SaveConfig();
 		return true;
 	}

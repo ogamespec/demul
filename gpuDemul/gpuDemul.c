@@ -28,6 +28,8 @@
 
 #define MAX_PROFILE_COUNT 8
 
+DEmulInfo* gpuDemulInfo;
+
 static LARGE_INTEGER start[MAX_PROFILE_COUNT];
 static LARGE_INTEGER finish[MAX_PROFILE_COUNT];
 
@@ -56,6 +58,8 @@ void DEMUL_printf(char *format, ...) {
 
 int gpuOpen(DEmulInfo *demulInfo, void *pgpu) {
 	
+	gpuDemulInfo = demulInfo;
+
 	if (!LoadConfig(true))
 		return 0;
 
@@ -98,7 +102,7 @@ extern float angle;
 void gpuSync() {
 	MSG msg;
 
-	while (PeekMessage(&msg, gDemulInfo->hGpuWnd, 0, 0, PM_REMOVE)) {
+	while (PeekMessage(&msg, gpuDemulInfo->hGpuWnd, 0, 0, PM_REMOVE)) {
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
@@ -121,7 +125,7 @@ void gpuSync() {
 	if (time(NULL) > t) {
 		time(&t);
 		sprintf(szTitle, "fps %0ld", fps);
-		SetWindowText(gDemulInfo->hGpuWnd, szTitle);
+		SetWindowText(gpuDemulInfo->hGpuWnd, szTitle);
 		fps = 0;
 	}
 }

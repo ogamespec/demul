@@ -18,11 +18,10 @@
 #include "config.h"
 #include "plugins.h"
 
-HINSTANCE hinstance;
-DEmulInfo *gDemulInfo = NULL;
+DEmulInfo* padDemulInfo;
 
 int padOpen(DEmulInfo *demulInfo) {
-	gDemulInfo = demulInfo;
+	padDemulInfo = demulInfo;
 	if (!padOpenDevice()) {
 		padCloseDevice();
 		return 0;

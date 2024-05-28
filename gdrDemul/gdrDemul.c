@@ -19,9 +19,6 @@
 #include "config.h"
 #include "plugins.h"
 
-HINSTANCE hinstance;
-HWND hWnd;
-
 int gdrOpen(DEmulInfo *demulInfo) {
 	if (!LoadConfig(true))
 		return 0;

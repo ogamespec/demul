@@ -19,8 +19,6 @@
 #include "spudevice.h"
 #include "plugins.h"
 
-HINSTANCE hinstance;
-
 int spuOpen(DEmulInfo *demulInfo, void *pspu) {
 	ARAM = pspu;
 	if (!spuOpenDevice()) {

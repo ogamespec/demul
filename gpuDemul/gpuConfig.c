@@ -15,7 +15,7 @@
 
 #include <windows.h>
 #include <stdio.h>
-#include "resource.h"
+#include "win32/resource.h"
 #include "gpuConfig.h"
 #include "gpuDemul.h"
 #include "inifile.h"
@@ -27,28 +27,28 @@ WPARAM GetCBState(long state) {
 }
 
 void UpdateCfg(HWND hwnd) {
-	gpucfg.fullScreen = SendDlgItemMessage(hwnd, IDC_FULL_SCREEN, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
-	gpucfg.ListSorting = SendDlgItemMessage(hwnd, IDC_CHECK2, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
-	gpucfg.AlphasubSort = SendDlgItemMessage(hwnd, IDC_CHECK3, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
-	gpucfg.PunchsubSort = SendDlgItemMessage(hwnd, IDC_CHECK5, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
-	gpucfg.AlphaZWriteDisable = SendDlgItemMessage(hwnd, IDC_CHECK4, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
-	gpucfg.Wireframe = SendDlgItemMessage(hwnd, IDC_CHECK6, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
-	gpucfg.check7 = SendDlgItemMessage(hwnd, IDC_CHECK7, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
-	gpucfg.check8 = SendDlgItemMessage(hwnd, IDC_CHECK8, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
+	gpucfg.fullScreen = SendDlgItemMessage(hwnd, IDC_GPU_FULL_SCREEN, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
+	gpucfg.ListSorting = SendDlgItemMessage(hwnd, IDC_GPU_CHECK2, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
+	gpucfg.AlphasubSort = SendDlgItemMessage(hwnd, IDC_GPU_CHECK3, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
+	gpucfg.PunchsubSort = SendDlgItemMessage(hwnd, IDC_GPU_CHECK5, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
+	gpucfg.AlphaZWriteDisable = SendDlgItemMessage(hwnd, IDC_GPU_CHECK4, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
+	gpucfg.Wireframe = SendDlgItemMessage(hwnd, IDC_GPU_CHECK6, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
+	gpucfg.check7 = SendDlgItemMessage(hwnd, IDC_GPU_CHECK7, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
+	gpucfg.check8 = SendDlgItemMessage(hwnd, IDC_GPU_CHECK8, BM_GETCHECK, 0, 0) != BST_UNCHECKED;
 }
 
 static BOOL CALLBACK Configure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	switch (msg) {
 	case WM_INITDIALOG:
 	{
-		SendDlgItemMessage(hwnd, IDC_FULL_SCREEN, BM_SETCHECK, GetCBState(gpucfg.fullScreen), 0);
-		SendDlgItemMessage(hwnd, IDC_CHECK2, BM_SETCHECK, GetCBState(gpucfg.ListSorting), 0);
-		SendDlgItemMessage(hwnd, IDC_CHECK3, BM_SETCHECK, GetCBState(gpucfg.AlphasubSort), 0);
-		SendDlgItemMessage(hwnd, IDC_CHECK4, BM_SETCHECK, GetCBState(gpucfg.AlphaZWriteDisable), 0);
-		SendDlgItemMessage(hwnd, IDC_CHECK5, BM_SETCHECK, GetCBState(gpucfg.PunchsubSort), 0);
-		SendDlgItemMessage(hwnd, IDC_CHECK6, BM_SETCHECK, GetCBState(gpucfg.Wireframe), 0);
-		SendDlgItemMessage(hwnd, IDC_CHECK7, BM_SETCHECK, GetCBState(gpucfg.check7), 0);
-		SendDlgItemMessage(hwnd, IDC_CHECK8, BM_SETCHECK, GetCBState(gpucfg.check8), 0);
+		SendDlgItemMessage(hwnd, IDC_GPU_FULL_SCREEN, BM_SETCHECK, GetCBState(gpucfg.fullScreen), 0);
+		SendDlgItemMessage(hwnd, IDC_GPU_CHECK2, BM_SETCHECK, GetCBState(gpucfg.ListSorting), 0);
+		SendDlgItemMessage(hwnd, IDC_GPU_CHECK3, BM_SETCHECK, GetCBState(gpucfg.AlphasubSort), 0);
+		SendDlgItemMessage(hwnd, IDC_GPU_CHECK4, BM_SETCHECK, GetCBState(gpucfg.AlphaZWriteDisable), 0);
+		SendDlgItemMessage(hwnd, IDC_GPU_CHECK5, BM_SETCHECK, GetCBState(gpucfg.PunchsubSort), 0);
+		SendDlgItemMessage(hwnd, IDC_GPU_CHECK6, BM_SETCHECK, GetCBState(gpucfg.Wireframe), 0);
+		SendDlgItemMessage(hwnd, IDC_GPU_CHECK7, BM_SETCHECK, GetCBState(gpucfg.check7), 0);
+		SendDlgItemMessage(hwnd, IDC_GPU_CHECK8, BM_SETCHECK, GetCBState(gpucfg.check8), 0);
 
 		return TRUE;
 	}
@@ -63,13 +63,13 @@ static BOOL CALLBACK Configure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
 			EndDialog(hwnd, 0);
 			return TRUE;
 
-		case IDC_CHECK2:
-		case IDC_CHECK3:
-		case IDC_CHECK4:
-		case IDC_CHECK5:
-		case IDC_CHECK6:
-		case IDC_CHECK7:
-		case IDC_CHECK8:
+		case IDC_GPU_CHECK2:
+		case IDC_GPU_CHECK3:
+		case IDC_GPU_CHECK4:
+		case IDC_GPU_CHECK5:
+		case IDC_GPU_CHECK6:
+		case IDC_GPU_CHECK7:
+		case IDC_GPU_CHECK8:
 			UpdateCfg(hwnd);
 			break;
 		}
@@ -83,7 +83,7 @@ static BOOL CALLBACK Configure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
 bool gpuSetConfig() {
 	GPU_CFG backUp;
 	backUp = gpucfg;
-	if (DialogBox(demulInfo.hMainInstance, MAKEINTRESOURCE(IDD_DIALOG), GetActiveWindow(), (DLGPROC)Configure) == IDOK) {
+	if (DialogBox(demulInfo.hMainInstance, MAKEINTRESOURCE(IDD_GPU_DIALOG), GetActiveWindow(), (DLGPROC)Configure) == IDOK) {
 		gpuSaveConfig();
 		return true;
 	}

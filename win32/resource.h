@@ -11,6 +11,7 @@
 #define IDD_BIOS_AND_PLUGINS            103
 #define IDI_MAIN_ICON                   104
 #define IDD_GDR_DIALOG                  105
+#define IDD_GPU_DIALOG                  106
 #define IDC_BIOS_DIALOG_GPU             1001
 #define IDC_BIOS_DIALOG_SPU             1002
 #define IDC_BIOS_DIALOG_GDR             1003
@@ -22,6 +23,14 @@
 #define IDC_BIOS_DIALOG_FLASH_DESCRIPTION 1009
 #define IDC_BIOS_DIALOG_FLASH_SELECT    1010
 #define IDC_GDR_COMBO                   1011
+#define IDC_GPU_FULL_SCREEN             2000
+#define IDC_GPU_CHECK2                  2001
+#define IDC_GPU_CHECK3                  2002
+#define IDC_GPU_CHECK4                  2003
+#define IDC_GPU_CHECK5                  2005
+#define IDC_GPU_CHECK6                  2006
+#define IDC_GPU_CHECK7                  2007
+#define IDC_GPU_CHECK8                  2008
 #define IDR_EMU_RUN                     40001
 #define ID_CONFIG_PAD                   40002
 #define ID_CONFIG_GPU                   40003
@@ -35,14 +44,17 @@
 #define ID_CONFIG_DEBUGGER              40011
 #define ID_DEBUGGER_START               40012
 
+
+
+
 // Next default values for new objects
 //
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        106
+#define _APS_NEXT_RESOURCE_VALUE        107
 #define _APS_NEXT_COMMAND_VALUE         40013
-#define _APS_NEXT_CONTROL_VALUE         1012
+#define _APS_NEXT_CONTROL_VALUE         7000
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -71,16 +71,8 @@
     <ClInclude Include="..\gpuDemul\png.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\gpuDemul\resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\gpuDemul\twiddle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\gpuDemul\gpuDemul.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

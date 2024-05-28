@@ -39,11 +39,7 @@
     <ClInclude Include="..\gpuDemul\gpuTransfer.h" />
     <ClInclude Include="..\gpuDemul\gpuWnd.h" />
     <ClInclude Include="..\gpuDemul\png.h" />
-    <ClInclude Include="..\gpuDemul\resource.h" />
     <ClInclude Include="..\gpuDemul\twiddle.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\gpuDemul\gpuDemul.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

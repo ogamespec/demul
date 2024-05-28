@@ -39,8 +39,6 @@ void spuReset() {
 void spuConfigure() {
 }
 
-void spuAbout() {
-}
 void spuSync(u32 samples) {
 	//spuDeviceSync(samples);
 }

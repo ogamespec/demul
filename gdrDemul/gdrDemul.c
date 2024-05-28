@@ -40,9 +40,6 @@ void gdrConfigure() {
 		gdrSetConfig();
 }
 
-void gdrAbout() {
-}
-
 u32 gdrGetStatus() {
 	return GerStatusDevice();
 }

@@ -59,9 +59,6 @@ void padConfigure() {
 		padCloseDevice();
 }
 
-void padAbout() {
-}
-
 u32 padJoyCaps(u32 port) {
 	return /*0xfe060f00*/ JoyCaps[port];
 }

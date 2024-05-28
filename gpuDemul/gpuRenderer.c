@@ -19,7 +19,7 @@
 #include "gpuprim.h"
 #include "gpuregs.h"
 #include "gpudemul.h"
-#include "config.h"
+#include "gpuConfig.h"
 
 HDC hdc = NULL;
 HGLRC hrc = NULL;
@@ -588,10 +588,10 @@ int comp_func(const void* a, const void *b) {
 
 	if (obja->polygon.tsp.usealpha < objb->polygon.tsp.usealpha) return -1;
 	else if (obja->polygon.tsp.usealpha > objb->polygon.tsp.usealpha) return 1;
-	else if ((obja->midZ > objb->midZ) && obja->polygon.tsp.usealpha && cfg.AlphasubSort) return -1;
-	else if ((obja->midZ < objb->midZ) && obja->polygon.tsp.usealpha && cfg.AlphasubSort) return 1;
-	else if ((obja->midZ > objb->midZ) && cfg.PunchsubSort) return -1;
-	else if ((obja->midZ < objb->midZ) && cfg.PunchsubSort) return 1;
+	else if ((obja->midZ > objb->midZ) && obja->polygon.tsp.usealpha && gpucfg.AlphasubSort) return -1;
+	else if ((obja->midZ < objb->midZ) && obja->polygon.tsp.usealpha && gpucfg.AlphasubSort) return 1;
+	else if ((obja->midZ > objb->midZ) && gpucfg.PunchsubSort) return -1;
+	else if ((obja->midZ < objb->midZ) && gpucfg.PunchsubSort) return 1;
 	else return 0;
 
 //	if((obja->midZ>objb->midZ)) return -1;
@@ -651,7 +651,7 @@ void glInternalFlush(u32 target) {
 	glDepthMask(GL_TRUE);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	if (cfg.ListSorting) {
+	if (gpucfg.ListSorting) {
 		qsort((void*)objList, objCount, sizeof(OBJECT), comp_func);
 //		qsort((void*)objList,objCount,sizeof(OBJECT),listtypesort_func);
 //		qsort((void*)objList,objCount,sizeof(OBJECT),transsort_func);
@@ -685,13 +685,13 @@ void glInternalFlush(u32 target) {
 
 //			DEMUL_printf(">object %3d, dist = %6f, listtype = %d, pcw = %08X, isp = %08X, tsp = %08X, tcw = %08X\n",i,obj->midZ, obj->polygon.pcw.listtype, obj->polygon.pcw.all, obj->polygon.isp.all, obj->polygon.tsp.all, obj->polygon.tcw.all);
 
-			if (polygon.tsp.usealpha && cfg.AlphaZWriteDisable)
+			if (polygon.tsp.usealpha && gpucfg.AlphaZWriteDisable)
 				polygon.isp.zwritedis = 1;
 
 			SetupShadeMode();
 			SetupCullMode();
 			SetupZBuffer();
-			if (cfg.Wireframe) {
+			if (gpucfg.Wireframe) {
 				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			} else {
 				SetupAlphaTest();

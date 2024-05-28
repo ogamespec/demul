@@ -91,9 +91,6 @@ void gpuConfigure() {
 		gpuSetConfig();
 }
 
-void gpuAbout() {
-}
-
 int fps;
 time_t t;
 char szTitle[256];

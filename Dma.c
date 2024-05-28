@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "console.h"
+#include "debug.h"
 
 #include "sh4.h"
 #include "plugins.h"

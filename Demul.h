@@ -29,7 +29,6 @@
 #include "memory.h"
 #include "sh4.h"
 #include "disasm.h"
-#include "console.h"
 #include "debug.h"
 
 int  OpenEmu();

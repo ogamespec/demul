@@ -23,7 +23,7 @@
 #include "counters.h"
 #include "gpu.h"
 #include "plugins.h"
-#include "console.h"
+#include "debug.h"
 
 void HBLANK(u32 cycle) {
 	static u32 hcount = 0;

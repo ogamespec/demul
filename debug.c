@@ -21,7 +21,7 @@
 #include "demul.h"
 #include "memory.h"
 #include "inifile.h"
-#include "configure.h"
+#include "win32/configure.h"
 
 #ifdef  DEMUL_DEBUG
 

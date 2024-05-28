@@ -2,6 +2,10 @@
 // Microsoft Visual C++ generated include file.
 // Used by gpuDemul.rc
 //
+#ifndef IDC_STATIC
+#define IDC_STATIC				-1
+#endif
+
 #define IDD_DIALOG                      101
 #define IDC_FULL_SCREEN                 2000
 #define IDC_CHECK2                      2001

@@ -15,11 +15,11 @@
 
 #include "demul.h"
 #include "interpreter.h"
-#include "dynarec.h"
+#include "x86-32/dynarec.h"
 #include "arm.h"
 #include "gpu.h"
 #include "plugins.h"
-#include "configure.h"
+#include "win32/configure.h"
 
 bool EmuRunning = false;
 static bool EmuOpened = false;

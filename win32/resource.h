@@ -2,6 +2,11 @@
 // Microsoft Visual C++ generated include file.
 // Used by demul.rc
 //
+
+#ifndef IDC_STATIC
+#define IDC_STATIC				-1
+#endif
+
 #define IDR_MENU                        102
 #define IDD_BIOS_AND_PLUGINS            103
 #define IDI_MAIN_ICON                   104

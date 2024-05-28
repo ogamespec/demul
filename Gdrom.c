@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "console.h"
+#include "debug.h"
 #include "gdrom.h"
 #include "asic.h"
 #include "sh4.h"
@@ -216,6 +216,7 @@ void WriteGdrom16(u32 mem, u16 value) {
 			case 1: src = &rom[2124];   break;
 			case 2: src = &rom[2140];   break;
 			case 3: src = &rom[2164];   break;
+			default: src = &rom[2024];   break;
 			}
 
 			memcpy(dst, src, size);

@@ -17,7 +17,7 @@
 #include "plugins.h"
 #include "memory.h"
 #include "gpu.h"
-#include "configure.h"
+#include "win32/configure.h"
 
 #define LoadFunc(lib, name) {												\
 	## name ## = (_ ## name ## )GetProcAddress(h ## lib ## Plugin, # name);	\

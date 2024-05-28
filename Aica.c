@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 
-#include "console.h"
+#include "debug.h"
 #include "aica.h"
 #include "sh4.h"
 #include "arm.h"

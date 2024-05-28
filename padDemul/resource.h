@@ -4,6 +4,10 @@
 //
 #define IDD_DIALOG                      101
 
+#ifndef IDC_STATIC
+#define IDC_STATIC				-1
+#endif
+
 #define IDC_UPP1                        1001
 #define IDC_EUPP1                       1002
 #define IDC_DOWNP1                      1003

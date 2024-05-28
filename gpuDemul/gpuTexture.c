@@ -273,7 +273,7 @@ void CreateTextureARGB1555(TxtrCache *texture) {
 				}
 			}
 		} else {
-			u32 min = th < tw ? th > > 1 : tw >> 1;
+			u32 min = th < tw ? th >> 1 : tw >> 1;
 			u32 mask = min - 1;
 			u32 notmask = ~mask;
 			u32 powmin = uppow2(min);
@@ -371,7 +371,7 @@ void CreateTextureARGB0565(TxtrCache *texture) {
 				}
 			}
 		} else {
-			u32 min = th < tw ? th > > 1 : tw >> 1;
+			u32 min = th < tw ? th >> 1 : tw >> 1;
 			u32 mask = min - 1;
 			u32 notmask = ~mask;
 			u32 powmin = uppow2(min);
@@ -469,7 +469,7 @@ void CreateTextureARGB4444(TxtrCache *texture) {
 				}
 			}
 		} else {
-			u32 min = th < tw ? th > > 1 : tw >> 1;
+			u32 min = th < tw ? th >> 1 : tw >> 1;
 			u32 mask = min - 1;
 			u32 notmask = ~mask;
 			u32 powmin = uppow2(min);
@@ -643,7 +643,7 @@ void CreateTextureCLUT4(TxtrCache *texture) {
 	u32 *clut = (u32*)&REGS[0x9000 + ((texture->tcw.special) << 6)];
 	u8  *src = (u8*)&VRAM[texture->texaddr];
 
-	u32 min = th < tw ? th > > 1 : tw >> 1;
+	u32 min = th < tw ? th >> 1 : tw >> 1;
 	u32 mask = min - 1;
 	u32 notmask = ~mask;
 	u32 powmin = uppow2(min);

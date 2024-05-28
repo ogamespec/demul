@@ -13,7 +13,7 @@
  *
  * Version 0.2: Added LOWERCASE option. Colors to branch opcodes.
  * Version 0.1: All opcodes seems to be implemented.
-/*
+*/
 
 #include "Demul.h"
 #include <string.h>

@@ -30,7 +30,7 @@
 #include "rts.h"
 #include "modem.h"
 #include "gaps.h"
-#include "configure.h"
+#include "win32/configure.h"
 #include "demul.h"
 
 #ifdef DEMUL_DEBUG

@@ -1,0 +1,10 @@
+src/VS2022/.vs
+src/VS2022/x64
+src/VS2022/Win32
+src/VS2022/*.vcxproj.user
+src/VS2022/Debug
+src/VS2022/Release
+/Build
+
+*.aps
+stdout.txt

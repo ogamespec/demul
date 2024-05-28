@@ -316,17 +316,21 @@ void SetupTexture() {
 	}
 }
 
-//void CONV_8888_REV_TO_8888(u32 *src, u32 *dst)
-//{
-//	u32 i;
-//	for(i=0; i<w*h; i++)
-//	{
-//		u32 color = *(src++);
-//		*(dst++) =	((color & 0x00ff0000) >> 16) |
-//					((color & 0x000000ff) << 16) |
-//					((color & 0xff00ff00) << 0 );
-//	}
-//}
+#ifdef _M_X64
+
+void CONV_8888_REV_TO_8888(u32 *src, u32 *dst, u32 sizef)
+{
+	u32 i;
+	for(i=0; i< sizef*2; i++)
+	{
+		u32 color = *(src++);
+		*(dst++) =	((color & 0x00ff0000) >> 16) |
+					((color & 0x000000ff) << 16) |
+					((color & 0xff00ff00) << 0 );
+	}
+}
+
+#else
 
 void CONV_8888_REV_TO_8888(u32 *src, u32 *dst, u32 sizef) {
 	static __int64 mask1 = 0x00FF000000FF0000;
@@ -363,18 +367,24 @@ void CONV_8888_REV_TO_8888(u32 *src, u32 *dst, u32 sizef) {
 	}
 }
 
-//void CONV_0565_REV_TO_8888(u16 *src, u32 *dst)
-//{
-//	u32 i;
-//	for(i=0; i<w*h; i++)
-//	{
-//		u32 color = *(src++);
-//		*(dst++)  = ((color & 0x001f) << 19) |
-//					((color & 0x07e0) << 5 ) |
-//					((color & 0xf800) >> 8 ) |
-//					((0xff000000    ) << 0);
-//	}
-//}
+#endif // _M_X64
+
+#ifdef _M_X64
+
+void CONV_0565_REV_TO_8888(u16 *src, u32 *dst, u32 sizef)
+{
+	u32 i;
+	for(i=0; i< sizef*4; i++)
+	{
+		u32 color = *(src++);
+		*(dst++)  = ((color & 0x001f) << 19) |
+					((color & 0x07e0) << 5 ) |
+					((color & 0xf800) >> 8 ) |
+					((0xff000000    ) << 0);
+	}
+}
+
+#else
 
 void CONV_0565_REV_TO_8888(u16 *src, u32 *dst, u32 sizef) {
 	static __int64 mask1 = 0x0000001F0000001F;
@@ -431,6 +441,9 @@ void CONV_0565_REV_TO_8888(u16 *src, u32 *dst, u32 sizef) {
 		pop esi
 	}
 }
+
+#endif // _M_X64
+
 /*
 void CONV_8888_REV_TO_0565(u32 *src, u16 *dst, u32 w, u32 h)
 {

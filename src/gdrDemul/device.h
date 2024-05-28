@@ -21,6 +21,8 @@
 #include "types.h"
 
 #define GDR_MODULE_NAME "gdrDemul"
+#define MAX_TRACKS 0x100
+#define TRACKS_MASK 0xff
 
 typedef struct {
 	UCHAR Reserved0;
@@ -35,7 +37,7 @@ typedef struct {
 	u8 Length[2];
 	u8 FirstTrack;
 	u8 LastTrack;
-	TRACK TrackData[100];
+	TRACK TrackData[MAX_TRACKS];
 } TOC;
 
 typedef struct {

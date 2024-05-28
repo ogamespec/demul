@@ -28,6 +28,7 @@ static s32 iount;
 static u32 fpucws;
 
 static void INLINE SAVE_ROUNDING_MODE() {
+#ifndef _M_X64
 	u32 fpucw;
 
 	__asm fnstcw dword ptr fpucws
@@ -39,10 +40,13 @@ static void INLINE SAVE_ROUNDING_MODE() {
 	__asm add eax, 0x0000007f
 	__asm mov dword ptr fpucw, eax
 	__asm fldcw dword ptr fpucw
+#endif
 }
 
 static void INLINE RESTORE_ROUNDING_MODE() {
+#ifndef _M_X64
 	__asm fldcw dword ptr fpucws
+#endif
 }
 
 

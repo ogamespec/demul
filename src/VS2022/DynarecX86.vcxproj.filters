@@ -36,6 +36,9 @@
     <ClCompile Include="..\x86-32\x86.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\x86-32\DynarecStub.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\x86-32\3dnow.h">

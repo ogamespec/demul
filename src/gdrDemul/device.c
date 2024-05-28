@@ -147,10 +147,10 @@ void ReadInfoDevice() {
 
 	memset(&GD_TOC, 0xffffffff, sizeof(GD_TOC));
 
-	track = Toc.FirstTrack - 1;
+	track = (Toc.FirstTrack - 1) & TRACKS_MASK;
 	GD_TOC.first = (Toc.FirstTrack << 8) | ((u32)Toc.TrackData[track].Control << 4) | ((u32)Toc.TrackData[track].Adr << 0);
 
-	track = Toc.LastTrack - 1;
+	track = (Toc.LastTrack - 1) & TRACKS_MASK;
 	GD_TOC.last = (Toc.LastTrack << 8) | ((u32)Toc.TrackData[track].Control << 4) | ((u32)Toc.TrackData[track].Adr << 0);
 
 	track = Toc.LastTrack - Toc.FirstTrack + 1;

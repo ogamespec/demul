@@ -36,7 +36,7 @@ static BOOL CALLBACK Configure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			sprintf(name, "%c:", i);
 			if ((GetDriveType(name) != DRIVE_CDROM))
 				continue;
-			idx = SendDlgItemMessage(hWnd, IDC_GDR_COMBO, CB_ADDSTRING, 0, (LPARAM)name);
+			idx = (int)SendDlgItemMessage(hWnd, IDC_GDR_COMBO, CB_ADDSTRING, 0, (LPARAM)name);
 			if (toupper(i) == toupper(gdrcfg.drive[0]))
 				selectedIdx = idx;
 		}

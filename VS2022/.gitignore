@@ -4,3 +4,4 @@ Win32
 *.vcxproj.user
 Debug
 Release
+Build

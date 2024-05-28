@@ -23,19 +23,19 @@ DEmulInfo *gDemulInfo = NULL;
 
 int padOpen(DEmulInfo *demulInfo) {
 	gDemulInfo = demulInfo;
-	if (!OpenDevice()) {
-		CloseDevice();
+	if (!padOpenDevice()) {
+		padCloseDevice();
 		return 0;
 	}
 	if (!LoadConfig(true)) {
-		CloseDevice();
+		padCloseDevice();
 		return 0;
 	}
 	return 1;
 }
 
 void padClose() {
-	CloseDevice();
+	padCloseDevice();
 }
 
 void padReset() {
@@ -44,12 +44,12 @@ void padReset() {
 void padConfigure() {
 	bool wasOpened = IsOpened();
 	if (!wasOpened) {
-		if (!OpenDevice()) {
-			CloseDevice();
+		if (!padOpenDevice()) {
+			padCloseDevice();
 			return;
 		}
 		if (!LoadConfig(false)) {
-			CloseDevice();
+			padCloseDevice();
 			return;
 		}
 	}
@@ -57,7 +57,7 @@ void padConfigure() {
 	SetConfig();
 
 	if (!wasOpened)
-		CloseDevice();
+		padCloseDevice();
 }
 
 void padAbout() {

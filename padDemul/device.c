@@ -76,7 +76,7 @@ BOOL CALLBACK InitJoystick(LPCDIDEVICEINSTANCE lpDIIJoy, LPVOID pvRef) {
 	return DIENUM_CONTINUE;
 }
 
-bool OpenDevice() {
+bool padOpenDevice() {
 	int i;
 	HRESULT hr;
 
@@ -126,7 +126,7 @@ bool OpenDevice() {
 	return 1;
 }
 
-void CloseDevice() {
+void padCloseDevice() {
 	int i;
 
 	if (lpDIKeyboard != NULL) {
@@ -153,7 +153,7 @@ bool IsOpened() {
 	return(lpDI != NULL);
 }
 
-__inline bool ReadDevice() {
+__inline bool padReadDevice() {
 	u32 i;
 	HRESULT hr;
 
@@ -273,7 +273,7 @@ void GetControllerDevice(CONTROLLER *controller, u32 port) {
 	controller->leftTrig = controller->rightTrig = 0;
 	controller->stick1X = controller->stick1Y = controller->stick2X = controller->stick2Y = 128;
 
-	if (!ReadDevice()) return;
+	if (!padReadDevice()) return;
 
 	if (KEYDOWN(DIK_ESCAPE) != 0)
 		PostMessage(gDemulInfo->hMainWnd, WM_QUIT, 0, 0);
@@ -329,7 +329,7 @@ void GetControllerDevice(CONTROLLER *controller, u32 port) {
 int GetKeyDevice() {
 	u32 i, j, joyIdx;
 
-	if (!ReadDevice()) return 0;
+	if (!padReadDevice()) return 0;
 
 	for (i = 1; i < 256; i++)
 		if (KEYDOWN(i)) return i;

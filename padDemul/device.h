@@ -64,9 +64,9 @@ typedef struct {
 	u8 stick2Y;
 } CONTROLLER;
 
-bool OpenDevice();
+bool padOpenDevice();
 int  GetKeyDevice();
 void GetControllerDevice(CONTROLLER *controller, u32 port);
-void CloseDevice();
+void padCloseDevice();
 bool IsOpened();
 #endif

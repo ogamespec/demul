@@ -8,3 +8,4 @@ src/VS2022/Release
 
 *.aps
 stdout.txt
+VMS.BIN

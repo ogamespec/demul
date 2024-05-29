@@ -15,30 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\gdrDemul\Config.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\gdrDemul\device.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\gdrDemul\gdrDemul.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\gdrDemul\gdrConfig.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\gdrDemul\Config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\gdrDemul\device.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\gdrDemul\resource.h">
+    <ClInclude Include="..\gdrDemul\gdrConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\gdrDemul\gdrDemul.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

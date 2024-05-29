@@ -90,10 +90,12 @@ bool padOpenDevice() {
 		return 0;
 	}
 
-	hr = IDirectInputDevice8_SetCooperativeLevel(lpDIKeyboard, demulInfo.hGpuWnd, DISCL_NONEXCLUSIVE | DISCL_FOREGROUND);
-	if (hr != DI_OK) {
-		MessageBox(GetActiveWindow(), "IDirectInputDevice8_SetCooperativeLevel FAILED", "padDemul", MB_OK);
-		return 0;
+	if (IsWindow(demulInfo.hGpuWnd)) {
+		hr = IDirectInputDevice8_SetCooperativeLevel(lpDIKeyboard, demulInfo.hGpuWnd, DISCL_NONEXCLUSIVE | DISCL_FOREGROUND);
+		if (hr != DI_OK) {
+			MessageBox(GetActiveWindow(), "IDirectInputDevice8_SetCooperativeLevel FAILED", "padDemul", MB_OK);
+			return 0;
+		}
 	}
 
 	hr = IDirectInputDevice8_SetDataFormat(lpDIKeyboard, &c_dfDIKeyboard);

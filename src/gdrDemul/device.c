@@ -19,20 +19,15 @@
 #include <ntddscsi.h>
 #include <stdio.h>
 #include <string.h>
+#include "types.h"
+#include "gdr_common.h"
 #include "device.h"
 
 HANDLE hDev = INVALID_HANDLE_VALUE;
 
 u32 sessions[100];
 
-typedef struct {
-	u32 entry[99];
-	u32 first;
-	u32 last;
-	u32 leadout;
-} GDR_TOC;
-
-GDR_TOC GD_TOC;
+static GDR_TOC GD_TOC;
 
 s32 msf_to_lba(u8 m, u8 s, u8 f) {
 	u32 lsn;

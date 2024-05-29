@@ -28,6 +28,7 @@
     <ClInclude Include="..\gdrDemul\gdi_device.h" />
     <ClInclude Include="..\gdrDemul\gdrConfig.h" />
     <ClInclude Include="..\gdrDemul\device.h" />
+    <ClInclude Include="..\gdrDemul\gdr_common.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

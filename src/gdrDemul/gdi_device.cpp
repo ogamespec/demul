@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string>
 #include "types.h"
+#include "gdr_common.h"
 #include "gdi_device.h"
 
 static gdi_device_state gdi;
@@ -19,7 +20,7 @@ int  gdiOpenDevice(char *image_path)
 	size_t found = path.find_last_of("/\\");
 	strcpy(gdi.base_dir, path.substr(0, found).c_str());
 
-	// Parse file
+	// Parse file and at the same time fill in the TOC
 	gdi.f = fopen(gdi.image_path, "rt");
 	if (!gdi.f) {
 		gdi.mounted = false;
@@ -54,7 +55,18 @@ int  gdiOpenDevice(char *image_path)
 			gdi.tracks[i].filesize = 0;
 			gdi.tracks[i].exists = 0;
 		}
+
+		gdi.toc.entry[i] = gdi.tracks[i].start_lba;
 	}
+
+	gdi.toc.first = gdi.tracks[0].start_lba;
+	size_t last = gdi.tracks_count - 1;
+	size_t last_track_sector_size = gdi.tracks[last].track_type == 0 ? 2352 : 2048;
+	gdi.toc.last = gdi.tracks[last].start_lba;
+	gdi.toc.leadout = gdi.toc.last + gdi.tracks[last].filesize / last_track_sector_size;
+
+	// TODO: Am I doing the right thing?
+	gdi.sessions[0] = gdi.tracks_count;
 
 	fclose(gdi.f);
 	gdi.f = nullptr;
@@ -139,14 +151,19 @@ extern "C"
 u32  gdiGetStatusDevice()
 {
 	// TODO: wtf these magic numbers
-	if (gdi.mounted) return 0x6;
+	if (!gdi.mounted) return 0x6;
 	return 0x22;
 }
 
 extern "C"
 void gdiReadTOCDevice(u8* buffer, u32 size)
 {
-	memset(buffer, 0, size);
+	if (!gdi.mounted) {
+		memset(buffer, 0, size);
+		return;
+	}
+
+	memcpy(buffer, &gdi.toc, sizeof(GDR_TOC) < size ? sizeof(GDR_TOC) : size);
 }
 
 extern "C"

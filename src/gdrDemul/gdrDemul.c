@@ -15,6 +15,8 @@
 
 #include <windows.h>
 #include <stdio.h>
+#include "types.h"
+#include "gdr_common.h"
 #include "device.h"
 #include "gdi_device.h"
 #include "gdrConfig.h"

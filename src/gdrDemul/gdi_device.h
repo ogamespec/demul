@@ -34,6 +34,7 @@ extern "C" {
 		u32 sessions[MAX_GDI_SESSIONS];
 		gdi_track tracks[MAX_GDI_TRACKS];
 		int tracks_count;
+		GDR_TOC toc;
 	} gdi_device_state;
 
 	int  gdiOpenDevice(char* image_path);

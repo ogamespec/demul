@@ -38,5 +38,8 @@
     <ClInclude Include="..\gdrDemul\gdi_device.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\gdrDemul\gdr_common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

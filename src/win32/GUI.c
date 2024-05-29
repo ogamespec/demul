@@ -53,11 +53,13 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		return TRUE;
 	case WM_COMMAND:
 		switch (LOWORD(wParam)) {
-		case IDR_EMU_RUN:
+		case ID_FILE_RUN:
 			if (demulInfo.hEmu == INVALID_HANDLE_VALUE)
 				demulInfo.hEmu = (HANDLE)_beginthread(RunEmu, 0, NULL);
 			return TRUE;
-
+		case ID_FILE_EXIT:
+			exit(0);
+			return TRUE;
 		case ID_CONFIG_GDR:
 			gdrConfigure();
 			return TRUE;
@@ -116,13 +118,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLin
 
 	demulInfo.hMainWnd = CreateWindow(
 		"window",
-		"DEMUL",
+		"Demul",
 		WS_OVERLAPPED | WS_SYSMENU |
 		WS_MINIMIZEBOX | WS_CLIPCHILDREN,
-		20,
-		20,
-		320 + GetSystemMetrics(SM_CXFIXEDFRAME) * 2,
-		200 + GetSystemMetrics(SM_CXFIXEDFRAME) * 2 + GetSystemMetrics(SM_CYMENU) + GetSystemMetrics(SM_CYCAPTION),
+		CW_USEDEFAULT,
+		CW_USEDEFAULT,
+		910 + GetSystemMetrics(SM_CXFIXEDFRAME) * 2,
+		460 + GetSystemMetrics(SM_CXFIXEDFRAME) * 2 + GetSystemMetrics(SM_CYMENU) + GetSystemMetrics(SM_CYCAPTION),
 		NULL,
 		NULL,
 		hInstance,

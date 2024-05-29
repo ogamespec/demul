@@ -2,11 +2,8 @@
 // Microsoft Visual C++ generated include file.
 // Used by demul.rc
 //
-
-#ifndef IDC_STATIC
-#define IDC_STATIC				-1
-#endif
-
+#define IDCANCEL2                       3
+#define ID_BUTTON_CHOOSE_GDI            3
 #define IDR_MENU                        102
 #define IDD_BIOS_AND_PLUGINS            103
 #define IDI_MAIN_ICON                   104
@@ -24,7 +21,6 @@
 #define IDC_BIOS_DIALOG_FLASH_DESCRIPTION 1009
 #define IDC_BIOS_DIALOG_FLASH_SELECT    1010
 #define IDC_GDR_COMBO                   1011
-
 #define IDC_UPP1                        2001
 #define IDC_EUPP1                       2002
 #define IDC_DOWNP1                      2003
@@ -69,7 +65,6 @@
 #define IDC_ES2LEFTP1                   2042
 #define IDC_S2RIGHTP1                   2043
 #define IDC_ES2RIGHTP1                  2044
-
 #define IDC_UPP2                        2101
 #define IDC_EUPP2                       2102
 #define IDC_DOWNP2                      2103
@@ -114,7 +109,6 @@
 #define IDC_ES2LEFTP2                   2142
 #define IDC_S2RIGHTP2                   2143
 #define IDC_ES2RIGHTP2                  2144
-
 #define IDC_UPP3                        2201
 #define IDC_EUPP3                       2202
 #define IDC_DOWNP3                      2203
@@ -159,7 +153,6 @@
 #define IDC_ES2LEFTP3                   2242
 #define IDC_S2RIGHTP3                   2243
 #define IDC_ES2RIGHTP3                  2244
-
 #define IDC_UPP4                        2301
 #define IDC_EUPP4                       2302
 #define IDC_DOWNP4                      2303
@@ -204,9 +197,7 @@
 #define IDC_ES2LEFTP4                   2342
 #define IDC_S2RIGHTP4                   2343
 #define IDC_ES2RIGHTP4                  2344
-
 #define IDC_FAKE                        2999
-
 #define IDC_GPU_FULL_SCREEN             3000
 #define IDC_GPU_CHECK2                  3001
 #define IDC_GPU_CHECK3                  3002
@@ -215,6 +206,9 @@
 #define IDC_GPU_CHECK6                  3006
 #define IDC_GPU_CHECK7                  3007
 #define IDC_GPU_CHECK8                  3008
+#define IDC_RADIO_METHOD_SCSI           7000
+#define IDC_RADIO_METHOD_GDI            7001
+#define IDC_EDIT_GDI_PATH               7002
 #define IDR_EMU_RUN                     40001
 #define ID_CONFIG_PAD                   40002
 #define ID_CONFIG_GPU                   40003
@@ -227,18 +221,22 @@
 #define ID_Menu                         40010
 #define ID_CONFIG_DEBUGGER              40011
 #define ID_DEBUGGER_START               40012
-
-
-
+#define ID_HELP_ABOUT                   40013
+#define ID_RUN_RUNDREAMCAST             40014
+#define ID_RUN_EXIT                     40015
+#define ID_EMU_RUN                      40016
+#define ID_FILE_RUN                     40017
+#define ID_FILE_EXIT                    40018
+#define IDC_STATIC                      -1
 
 // Next default values for new objects
-//
+// 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        108
-#define _APS_NEXT_COMMAND_VALUE         40013
-#define _APS_NEXT_CONTROL_VALUE         7000
+#define _APS_NEXT_COMMAND_VALUE         40019
+#define _APS_NEXT_CONTROL_VALUE         7003
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

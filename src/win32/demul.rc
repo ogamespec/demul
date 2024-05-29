@@ -21,6 +21,26 @@ LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_MAIN_ICON           ICON                    "demul_red.ico"
+
+#endif    // Russian (Russia) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // Dialog
 //
 
@@ -41,19 +61,26 @@ BEGIN
     PUSHBUTTON      "Select",IDC_BIOS_DIALOG_FLASH_SELECT,190,76,45,12
 END
 
-IDD_GDR_DIALOG DIALOGEX 0, 0, 186, 90
+IDD_GDR_DIALOG DIALOGEX 0, 0, 369, 158
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Configure"
+CAPTION "Configure GD-ROM"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,28,51,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,108,51,50,14
-    COMBOBOX        IDC_GDR_COMBO,29,18,129,213,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,234,126,62,22
+    PUSHBUTTON      "Cancel",IDCANCEL,300,126,61,23
+    COMBOBOX        IDC_GDR_COMBO,222,25,115,213,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "GD-ROM data handling method",IDC_STATIC,18,6,174,12
+    CONTROL         "Real device via SCSI",IDC_RADIO_METHOD_SCSI,"Button",BS_AUTORADIOBUTTON,18,24,162,12
+    CONTROL         "GDI Image",IDC_RADIO_METHOD_GDI,"Button",BS_AUTORADIOBUTTON,18,42,162,12
+    LTEXT           "Driver letter",IDC_STATIC,223,7,108,12
+    EDITTEXT        IDC_EDIT_GDI_PATH,16,84,198,18,ES_AUTOHSCROLL
+    LTEXT           "Path to GDI image file",IDC_STATIC,18,70,108,12
+    PUSHBUTTON      "Choose file...",ID_BUTTON_CHOOSE_GDI,221,85,61,17
 END
 
 IDD_GPU_DIALOG DIALOGEX 0, 0, 267, 159
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
-CAPTION "Configuration"
+CAPTION "GPU Configuration"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,131,136,50,14
@@ -262,16 +289,6 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Icon
-//
-
-// Icon with lowest ID value placed first to ensure application icon
-// remains consistent on all systems.
-IDI_MAIN_ICON           ICON                    "demul_red.ico"
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
 // DESIGNINFO
 //
 
@@ -281,19 +298,23 @@ BEGIN
     IDD_BIOS_AND_PLUGINS, DIALOG
     BEGIN
     END
+
+    IDD_GDR_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 150
+        BOTTOMMARGIN, 84
+    END
+
+    IDD_GPU_DIALOG, DIALOG
+    BEGIN
+    END
+
+    IDD_PAD_DIALOG, DIALOG
+    BEGIN
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif    // Russian (Russia) resources
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
-// English (United States) resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
-#pragma code_page(1252)
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -302,21 +323,30 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 MENU MENU
 BEGIN
-    MENUITEM "Run",                         IDR_EMU_RUN
-    POPUP "Config"
+    POPUP "File"
+    BEGIN
+        MENUITEM "Run Dreamcast",               ID_FILE_RUN
+        MENUITEM SEPARATOR
+        MENUITEM "Exit",                        ID_FILE_EXIT
+    END
+    POPUP "Settings"
     BEGIN
         MENUITEM "Game Pad",                    ID_CONFIG_PAD
         MENUITEM "Sound",                       ID_CONFIG_SPU
         MENUITEM "GD-ROM",                      ID_CONFIG_GDR
         MENUITEM "Graphics",                    ID_CONFIG_GPU
         MENUITEM SEPARATOR
-        POPUP "Mode"
+        POPUP "CPU Mode"
         BEGIN
             MENUITEM "Interpreter",                 ID_MODE_INTERPRETER
             MENUITEM "DynaRec",                     ID_MODE_DYNAREC
         END
         MENUITEM SEPARATOR
         MENUITEM "System Firmware",             ID_CONFIG_BIOS_AND_PLUGINS
+    END
+    POPUP "Help"
+    BEGIN
+        MENUITEM "About",                       ID_HELP_ABOUT
     END
 END
 

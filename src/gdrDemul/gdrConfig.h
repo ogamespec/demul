@@ -18,8 +18,13 @@
 
 #include "types.h"
 
+#define GDR_METHOD_SCSI 0
+#define GDR_METHOD_GDI_IMAGE 1				// https://dreamcast.wiki/GDI_format
+
 typedef struct {
 	char drive[8];
+	char image_path[MAX_PATH];			// Path to GDI image
+	int method;			// See GDR_METHOD definitions
 } GDR_CFG;
 
 extern GDR_CFG gdrcfg;

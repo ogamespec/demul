@@ -15,6 +15,8 @@ int  gdiOpenDevice(char *image_path)
 	memset(&gdi, 0, sizeof(gdi));
 	strcpy(gdi.image_path, image_path);
 
+	memset(&gdi.toc, 0xff, sizeof(gdi.toc));
+
 	// Get base dir
 	std::string path(image_path);
 	size_t found = path.find_last_of("/\\");

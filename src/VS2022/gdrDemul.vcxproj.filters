@@ -24,12 +24,18 @@
     <ClCompile Include="..\gdrDemul\gdrConfig.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\gdrDemul\gdi_device.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\gdrDemul\device.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\gdrDemul\gdrConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gdrDemul\gdi_device.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

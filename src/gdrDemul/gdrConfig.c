@@ -24,12 +24,23 @@
 GDR_CFG gdrcfg;
 
 static BOOL CALLBACK Configure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	OPENFILENAME openFileName;
+	char openFileBuf[MAX_PATH];
+
 	switch (msg) {
 	case WM_INITDIALOG:
 	{
 		char i;
 		int idx, selectedIdx;
 		selectedIdx = -1;
+
+		CheckRadioButton(
+			hWnd,
+			IDC_RADIO_METHOD_SCSI,
+			IDC_RADIO_METHOD_GDI,
+			gdrcfg.method == GDR_METHOD_SCSI ? IDC_RADIO_METHOD_SCSI : IDC_RADIO_METHOD_GDI);
+
+		SetDlgItemText(hWnd, IDC_EDIT_GDI_PATH, gdrcfg.image_path);
 
 		for (i = 'a'; i < 'z'; i++) {
 			char name[256];
@@ -49,11 +60,37 @@ static BOOL CALLBACK Configure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		switch (LOWORD(wParam)) {
 		case IDOK:
 		{
-			char drive[8];
+			SendDlgItemMessage(hWnd, IDC_GDR_COMBO, WM_GETTEXT, 5, (LPARAM)gdrcfg.drive);
 
-			SendDlgItemMessage(hWnd, IDC_GDR_COMBO, WM_GETTEXT, 5, (LPARAM)drive);
-			strcpy(gdrcfg.drive, drive);
+			if (IsDlgButtonChecked(hWnd, IDC_RADIO_METHOD_SCSI)) {
+				gdrcfg.method = GDR_METHOD_SCSI;
+			}
+			else if (IsDlgButtonChecked(hWnd, IDC_RADIO_METHOD_GDI)) {
+				gdrcfg.method = GDR_METHOD_GDI_IMAGE;
+			}
+
+			GetDlgItemText(hWnd, IDC_EDIT_GDI_PATH, gdrcfg.image_path, sizeof(gdrcfg.image_path));
+
 			EndDialog(hWnd, 1);
+			break;
+		}
+		case ID_BUTTON_CHOOSE_GDI:
+		{
+			ZeroMemory(&openFileName, sizeof(openFileName));
+			openFileName.lStructSize = sizeof(openFileName);
+			openFileName.hwndOwner = hWnd;
+			openFileName.lpstrFile = openFileBuf;
+			openFileName.lpstrFile[0] = '\0';
+			openFileName.nMaxFile = sizeof(openFileBuf);
+			openFileName.lpstrFilter = "GDI files (*.gdi)\0*.gdi\0All files (*.*)\0*.*\0";
+			openFileName.nFilterIndex = 1;
+			openFileName.lpstrFileTitle = NULL;
+			openFileName.nMaxFileTitle = 0;
+			openFileName.lpstrInitialDir = NULL;
+			openFileName.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+			if (GetOpenFileName(&openFileName) == TRUE) {
+				SetDlgItemText(hWnd, IDC_EDIT_GDI_PATH, openFileBuf);
+			}
 			break;
 		}
 
@@ -91,6 +128,8 @@ bool gdrLoadConfig(bool autoSetConfig) {
 	}
 
 	IniFile_getString(&iniFile, "drive", "name", gdrcfg.drive);
+	IniFile_getString(&iniFile, "drive", "gdi_path", gdrcfg.image_path);
+	gdrcfg.method = IniFile_getLong(&iniFile, "drive", "method");
 	return true;
 }
 
@@ -99,4 +138,6 @@ void gdrSaveConfig() {
 	if (!IniFile_open(&iniFile, GDR_MODULE_NAME)) return;
 
 	IniFile_setString(&iniFile, "drive", "name", gdrcfg.drive);
+	IniFile_setString(&iniFile, "drive", "gdi_path", gdrcfg.image_path);
+	IniFile_setLong(&iniFile, "drive", "method", gdrcfg.method);
 }

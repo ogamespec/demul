@@ -18,6 +18,8 @@
 
 #include "types.h"
 
+#define MAX_SECTOR 16
+
 #define GDR_METHOD_SCSI 0
 #define GDR_METHOD_GDI_IMAGE 1				// https://dreamcast.wiki/GDI_format
 

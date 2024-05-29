@@ -16,17 +16,38 @@
 #include <windows.h>
 #include <stdio.h>
 #include "device.h"
+#include "gdi_device.h"
 #include "gdrConfig.h"
 #include "Backends.h"
 
 int gdrOpen() {
 	if (!gdrLoadConfig(true))
 		return 0;
-	return gdrOpenDevice(gdrcfg.drive);
+
+	switch (gdrcfg.method) {
+	case GDR_METHOD_GDI_IMAGE:
+		return gdiOpenDevice(gdrcfg.image_path);
+	case GDR_METHOD_SCSI:
+		return gdrOpenDevice(gdrcfg.drive);
+	default:
+		break;
+	}
+	
+	return 0;
 }
 
 void gdrClose() {
-	gdrCloseDevice();
+
+	switch (gdrcfg.method) {
+	case GDR_METHOD_GDI_IMAGE:
+		gdiCloseDevice();
+		break;
+	case GDR_METHOD_SCSI:
+		gdrCloseDevice();
+		break;
+	default:
+		break;
+	}
 }
 
 void gdrReset() {
@@ -38,15 +59,45 @@ void gdrConfigure() {
 }
 
 u32 gdrGetStatus() {
-	return GerStatusDevice();
+
+	switch (gdrcfg.method) {
+		case GDR_METHOD_GDI_IMAGE:
+			return gdiGetStatusDevice();
+		case GDR_METHOD_SCSI:
+			return gdrGetStatusDevice();
+		default:
+			break;
+	}
+
+	return 0x22;
 }
 
 void gdrReadTOC(u8 *buffer, u32 size) {
-	ReadTOCDevice(buffer, size);
+
+	switch (gdrcfg.method) {
+	case GDR_METHOD_GDI_IMAGE:
+		gdiReadTOCDevice(buffer, size);
+		break;
+	case GDR_METHOD_SCSI:
+		gdrReadTOCDevice(buffer, size);
+		break;
+	default:
+		break;
+	}
 }
 
 void gdrReadInfoSession(u8 *buffer, u32 session, u32 size) {
-	ReadInfoSessionDevice(buffer, session, size);
+
+	switch (gdrcfg.method) {
+	case GDR_METHOD_GDI_IMAGE:
+		gdiReadInfoSessionDevice(buffer, session, size);
+		break;
+	case GDR_METHOD_SCSI:
+		gdrReadInfoSessionDevice(buffer, session, size);
+		break;
+	default:
+		break;
+	}
 }
 
 void gdrReadSectors(u8 *buffer, u32 sector, u32 count, u32 mode) {
@@ -73,7 +124,14 @@ void gdrReadSectors(u8 *buffer, u32 sector, u32 count, u32 mode) {
 			sCount = count;
 		}
 
-		gdrReadDevice(buffer, size, sector, sCount, flags);
+		switch (gdrcfg.method) {
+			case GDR_METHOD_GDI_IMAGE:
+				gdiReadDevice(buffer, size, sector, sCount, flags);
+				break;
+			case GDR_METHOD_SCSI:
+				gdrReadDevice(buffer, size, sector, sCount, flags);
+				break;
+		}
 
 		if ((s32)(count -= MAX_SECTOR) <= 0) break;
 		sector += MAX_SECTOR;

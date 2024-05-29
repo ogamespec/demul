@@ -33,6 +33,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\win32\demul_red.ico" />
+    <Image Include="..\win32\logo.bmp" />
+    <Image Include="logo.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Core.vcxproj">

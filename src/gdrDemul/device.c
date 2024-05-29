@@ -230,19 +230,19 @@ int gdrOpenDevice(char *dev) {
 	return 1;
 }
 
-void ReadTOCDevice(u8 *buffef, u32 size) {
+void gdrReadTOCDevice(u8 *buffer, u32 size) {
 	ReadInfoDevice();
-	memcpy(buffef, &GD_TOC, sizeof(GDR_TOC) < size ? sizeof(GDR_TOC) : size);
+	memcpy(buffer, &GD_TOC, sizeof(GDR_TOC) < size ? sizeof(GDR_TOC) : size);
 }
 
-void ReadInfoSessionDevice(u8 *buffer, u32 session, u32 size) {
+void gdrReadInfoSessionDevice(u8 *buffer, u32 session, u32 size) {
 	ReadInfoDevice();
 	buffer[0] = 1;
 	buffer[1] = 0;
 	*(u32*)&buffer[2] = sessions[session];
 }
 
-u32 GerStatusDevice() {
+u32 gdrGetStatusDevice() {
 	if (hDev == INVALID_HANDLE_VALUE) return 0x6;
 
 	return 0x22;

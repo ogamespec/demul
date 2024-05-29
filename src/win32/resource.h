@@ -10,6 +10,7 @@
 #define IDD_GDR_DIALOG                  105
 #define IDD_GPU_DIALOG                  106
 #define IDD_PAD_DIALOG                  107
+#define IDB_BITMAP1                     108
 #define IDC_BIOS_DIALOG_GPU             1001
 #define IDC_BIOS_DIALOG_SPU             1002
 #define IDC_BIOS_DIALOG_GDR             1003
@@ -234,7 +235,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        108
+#define _APS_NEXT_RESOURCE_VALUE        109
 #define _APS_NEXT_COMMAND_VALUE         40019
 #define _APS_NEXT_CONTROL_VALUE         7003
 #define _APS_NEXT_SYMED_VALUE           101

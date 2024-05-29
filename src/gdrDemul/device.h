@@ -16,8 +16,6 @@
 #ifndef __DEVICE_H__
 #define __DEVICE_H__
 
-#define MAX_SECTOR 16
-
 #include "types.h"
 
 #define GDR_MODULE_NAME "gdrDemul"
@@ -55,13 +53,13 @@ typedef struct {
 	u16 Length;
 	u8 FirstCompleteSession;
 	u8 LastCompleteSession;
-	TRACK_FULL TrackData[100];
+	TRACK_FULL TrackData[MAX_TRACKS];
 } TOC_FULL;
 
 int  gdrOpenDevice(char *dev);
-u32  GerStatusDevice();
-void ReadTOCDevice(u8 *buffef, u32 size);
-void ReadInfoSessionDevice(u8 *buffer, u32 session, u32 count);
+u32  gdrGetStatusDevice();
+void gdrReadTOCDevice(u8 * buffer, u32 size);
+void gdrReadInfoSessionDevice(u8 *buffer, u32 session, u32 count);
 void gdrReadDevice(u8 *buffer, u32 size, u32 sector, u32 count, u32 flags);
 void gdrCloseDevice();
 

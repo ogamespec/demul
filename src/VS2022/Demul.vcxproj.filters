@@ -45,5 +45,11 @@
     <Image Include="..\win32\demul_red.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="logo.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\win32\logo.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

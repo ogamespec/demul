@@ -24,6 +24,7 @@
 #include "configure.h"
 
 DEmulInfo demulInfo;
+static HBITMAP hBitmap;
 
 void UpdateGUIMenuState() {
 	HMENU hmenu = GetMenu(demulInfo.hMainWnd);
@@ -40,10 +41,15 @@ void UpdateGUIMenuState() {
 }
 
 
-LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+static LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	switch (msg) {
+	case WM_CREATE:
+		hBitmap = LoadBitmap(GetModuleHandle(NULL), MAKEINTRESOURCE(IDB_BITMAP1));
+		break;
 	case WM_QUIT:
 	case WM_CLOSE:
+		DestroyWindow(hWnd);
+		break;
 	case WM_DESTROY:
 		if (demulInfo.hEmu != INVALID_HANDLE_VALUE) SuspendThread(demulInfo.hEmu);
 		CloseEmu();
@@ -51,6 +57,37 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		if (demulInfo.hEmu != INVALID_HANDLE_VALUE) CloseHandle(demulInfo.hEmu);
 		exit(1);
 		return TRUE;
+	case WM_PAINT: {
+		HDC hdcInst, hdcBitmap;
+		PAINTSTRUCT ps;
+		BITMAP bp;
+
+		GetObject(hBitmap, sizeof(bp), &bp);
+
+		hdcInst = BeginPaint(hWnd, &ps);
+
+		// Create a memory device compatible with the above DC variable
+
+		hdcBitmap = CreateCompatibleDC(hdcInst);
+
+		// Select the new bitmap
+
+		SelectObject(hdcBitmap, hBitmap);
+
+		// Get client coordinates for the StretchBlt() function
+
+		RECT r;
+		GetClientRect(hWnd, &r);
+
+		// troublesome part, in my oppinion
+		StretchBlt(hdcInst, 0, 0, r.right - r.left, r.bottom - r.top, hdcBitmap, 0, 0, bp.bmWidth, bp.bmHeight, MERGECOPY);
+
+		// Cleanup
+
+		DeleteDC(hdcBitmap);
+		EndPaint(hWnd, &ps);
+		break;
+	}
 	case WM_COMMAND:
 		switch (LOWORD(wParam)) {
 		case ID_FILE_RUN:
@@ -93,6 +130,7 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	default:
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 	}
+	return 0;
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) {

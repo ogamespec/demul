@@ -19,11 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\gdrDemul\gdi_device.cpp" />
     <ClCompile Include="..\gdrDemul\gdrConfig.c" />
     <ClCompile Include="..\gdrDemul\device.c" />
     <ClCompile Include="..\gdrDemul\gdrDemul.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\gdrDemul\gdi_device.h" />
     <ClInclude Include="..\gdrDemul\gdrConfig.h" />
     <ClInclude Include="..\gdrDemul\device.h" />
   </ItemGroup>

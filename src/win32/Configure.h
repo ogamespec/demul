@@ -21,6 +21,7 @@
 #include "Backends.h"
 
 #define DEMUL_NAME "demul"
+#define DEMUL_REVISION_STR "Babaika"		// Just a catchy revision name for the development build/iteration
 #define MAX_DESCRIPTION 300
 
 //TO Wind - move to Memory unit ?

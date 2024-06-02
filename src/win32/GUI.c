@@ -122,6 +122,9 @@ static LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			SaveConfig();
 			UpdateGUIMenuState();
 			return TRUE;
+		case ID_HELP_ABOUT:
+			MessageBoxA(hWnd, "Unofficial experimental old Demul, revision " DEMUL_REVISION_STR, "About", MB_OK | MB_ICONINFORMATION);
+			break;
 
 		default:
 			return TRUE;
